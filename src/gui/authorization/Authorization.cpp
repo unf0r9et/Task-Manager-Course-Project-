@@ -1,13 +1,15 @@
-#include "interface/AuthorizationMenu.h"
+#include "interfaces/Interfaces.h"
+#include <qcoreapplication.h>
 #include <QLineEdit>
 #include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QMessageBox>
+#include <QFile>
 
-AuthorizationMenu::AuthorizationMenu(QWidget *parent) : QWidget(parent) {
+Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Вход в систему");
-    setFixedSize(800, 600);
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 
     loginEdit = new QLineEdit(this);
@@ -20,17 +22,6 @@ AuthorizationMenu::AuthorizationMenu(QWidget *parent) : QWidget(parent) {
     auto *passwordLabel = new QLabel("Пароль:", this);
     loginButton = new QPushButton("Войти", this);
     loginButton->setFixedWidth(200);
-    loginButton->setStyleSheet("QPushButton {"
-                             "    background-color: #2196F3;"
-                             "    color: white;"
-                             "    border-radius: 5px;"
-                             "}"
-                             "QPushButton:hover {"
-                             "    background-color: #1976D2;"
-                             "}"
-                             "QPushButton:pressed {"
-                             "    background-color: #0D47A1;"
-                             "}");
 
     auto *mainLayout = new QVBoxLayout();
 
@@ -65,11 +56,22 @@ AuthorizationMenu::AuthorizationMenu(QWidget *parent) : QWidget(parent) {
     mainLayout->addStretch();
 
     setLayout(mainLayout);
-
-    connect(loginButton, &QPushButton::clicked, this, &AuthorizationMenu::onLoginClicked);
+    loadStylesheet(":/styles/authorization.qss");
+    connect(loginButton, &QPushButton::clicked, this, &Authorization::onLoginClicked);
 }
 
-void AuthorizationMenu::onLoginClicked() {
+
+void Authorization::loadStylesheet(const QString &path) {
+    QFile file(path);
+    if (file.open(QFile::ReadOnly | QFile::Text)) {
+        QString styleSheet = QLatin1String(file.readAll());
+        this->setStyleSheet(styleSheet);
+        file.close();
+    }
+}
+
+
+void Authorization::onLoginClicked() {
     if (loginEdit->text() == "admin" && passwordEdit->text() == "1234")
         QMessageBox::information(this, "Успех", "Добро пожаловать, admin!");
     else

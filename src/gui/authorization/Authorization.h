@@ -6,18 +6,21 @@
 class QLineEdit;
 class QPushButton;
 
-class AuthorizationMenu : public QWidget {
+class Authorization : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AuthorizationMenu(QWidget *parent = nullptr);
+    explicit Authorization(QWidget *parent = nullptr);
 private slots:
     void onLoginClicked();
 
 private:
+    void loadStylesheet(const QString &path);
+
     QLineEdit *loginEdit;
     QLineEdit *passwordEdit;
     QPushButton *loginButton;
+
 };
 
 #endif // AUTHORIZATION_H

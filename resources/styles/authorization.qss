@@ -1,0 +1,50 @@
+/* Authorization Menu Styles */
+
+QWidget {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Стиль для кнопки входа */
+QPushButton#loginButton {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+    stop:0 #667eea, stop:1 #764ba2);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+QPushButton#loginButton:hover {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+    stop:0 #5a6fd8, stop:1 #6a4190);
+}
+
+QPushButton#loginButton:pressed {
+    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+    stop:0 #4c5bc6, stop:1 #58377e);
+}
+
+/* Стиль для полей ввода */
+QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 8px;
+    font-size: 14px;
+    min-width: 200px;
+}
+
+QLineEdit:focus {
+    border-color: #667eea;
+    background-color: #f0f8ff;
+}
+
+/* Стиль для меток */
+QLabel {
+    font-weight: bold;
+    color: #333;
+    min-width: 60px;
+}
