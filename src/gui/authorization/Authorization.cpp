@@ -11,15 +11,16 @@
 Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Вход в систему");
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    //setWindowFlags(Qt::FramelessWindowHint);
-
+    setWindowFlags(Qt::FramelessWindowHint);
 
 
 
 
     auto *registrationButton = new QPushButton("Reg", this);
-
-
+    auto *registrationLayout = new QHBoxLayout();
+    registrationLayout->addStretch();
+    registrationLayout->addWidget(registrationButton);
+    registrationLayout->addStretch();
 
 
     auto *photoLabel = new QLabel();
@@ -66,6 +67,7 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     authorizationLayout->addLayout(loginLayout);
     authorizationLayout->addLayout(passwordLayout);
     authorizationLayout->addLayout(buttonLayout);
+    authorizationLayout->addLayout(registrationLayout);
     authorizationLayout->addStretch();
 
     auto *mainLayout = new QHBoxLayout();
@@ -77,6 +79,7 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
 
     loadStylesheet(":/styles/authorization.qss");
     connect(loginButton, &QPushButton::clicked, this, &Authorization::onLoginClicked);
+    connect(registrationButton, &QPushButton::clicked, this, &Authorization::onRegisterClicked);
 }
 
 
@@ -99,6 +102,20 @@ void Authorization::onLoginClicked() {
 
 void Authorization::onRegisterClicked() {
     auto *registration = new Registration(this);
+    registration->setAttribute(Qt::WA_DeleteOnClose);
+    registration->setWindowFlag(Qt::Window, true);
+
+
+    this->hide();
+
+
+    connect(registration, &QWidget::destroyed, this, [this]() {
+        this->show();
+    });
+
+
+
     registration->show();
+
 }
 

@@ -21,7 +21,6 @@ private:
     QLineEdit *loginEdit;
     QLineEdit *passwordEdit;
     QPushButton *loginButton;
-    Registration *registration;
 };
 
 #endif // AUTHORIZATION_H
