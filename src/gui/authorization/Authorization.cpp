@@ -101,21 +101,6 @@ void Authorization::onLoginClicked() {
 }
 
 void Authorization::onRegisterClicked() {
-    auto *registration = new Registration(this);
-    registration->setAttribute(Qt::WA_DeleteOnClose);
-    registration->setWindowFlag(Qt::Window, true);
-
-
-    this->hide();
-
-
-    connect(registration, &QWidget::destroyed, this, [this]() {
-        this->show();
-    });
-
-
-
-    registration->show();
-
+    emit registerRequested();
 }
 

@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
-    Authorization menu;
+    AbstractMainWindow menu;
     menu.show();
 
     return QApplication::exec();
