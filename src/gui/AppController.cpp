@@ -14,8 +14,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     stack->addWidget(registration);
 
     connect(authorization, &Authorization::registerRequested, this, &AppController::showRegistration);
-    //connect(authorization, &Authorization::loginSuccessful, this, &AppController::showDashboard);
-    //connect(registration, &Registration::backRequested, this, &AppController::showAuthorization);
+    connect(registration, &Registration::authorizationRequested, this, &AppController::showAuthorization);
 
 }
 

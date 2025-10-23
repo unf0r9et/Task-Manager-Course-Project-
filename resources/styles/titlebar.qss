@@ -1,0 +1,14 @@
+/*
+ * titlebar - Qt Style Sheet
+ * Created: 24.10.25
+ */
+
+/* Base styling */
+
+#titleBar {
+    background-color: #000000; /* чёрный фон */
+}
+
+
+
+/* Add your QSS styles here */

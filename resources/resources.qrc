@@ -1,11 +1,10 @@
 <RCC>
     <qresource prefix="/">
+        <!--STYLES-->
         <file>styles/authorization.qss</file>
+        <file>styles/titlebar.qss</file>
 
-
+        <!--IMAGES-->
         <file>images/authorization.png</file>
-        <file>images/img00008.jpg</file>
-        <file>images/test.jpg</file>
-        <file>images/IMG_7157.PNG</file>
     </qresource>
 </RCC>

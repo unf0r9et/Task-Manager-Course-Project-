@@ -11,10 +11,14 @@
 class Registration : public QWidget {
     Q_OBJECT
 
-    public:
+public:
     explicit Registration(QWidget *parent = nullptr);
 
+signals:
+    void authorizationRequested();
 
+private:
+    void backToAuthorization();
 };
 
 

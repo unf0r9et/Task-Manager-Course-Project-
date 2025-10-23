@@ -1,4 +1,5 @@
 #include "interfaces/Interfaces.h"
+#include "StyleLoader.cpp"
 #include <qcoreapplication.h>
 #include <QLineEdit>
 #include <QLabel>
@@ -74,20 +75,13 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
 
     setLayout(mainLayout);
 
-    loadStylesheet(":/styles/authorization.qss");
+    StyleLoader::loadStyleSheet(this, ":/styles/authorization.qss");
+
+
     connect(loginButton, &QPushButton::clicked, this, &Authorization::onLoginClicked);
     connect(registrationButton, &QPushButton::clicked, this, &Authorization::onRegisterClicked);
 }
 
-
-void Authorization::loadStylesheet(const QString &path) {
-    QFile file(path);
-    if (file.open(QFile::ReadOnly | QFile::Text)) {
-        const QString styleSheet = QLatin1String(file.readAll());
-        this->setStyleSheet(styleSheet);
-        file.close();
-    }
-}
 
 
 void Authorization::onLoginClicked() {

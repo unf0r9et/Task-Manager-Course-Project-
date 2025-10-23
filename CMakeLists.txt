@@ -12,6 +12,7 @@ set(CMAKE_AUTOUIC ON)
 
 include_directories(
         ${CMAKE_SOURCE_DIR}/include
+        ${CMAKE_SOURCE_DIR}/src/utils/styleloader
 )
 
 set(RESOURCES

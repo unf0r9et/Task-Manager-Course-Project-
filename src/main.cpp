@@ -7,6 +7,10 @@ int main(int argc, char *argv[]) {
 
     QApplication app(argc, argv);
 
+    // auto *titleBar = new TitleBar();
+    //
+    // titleBar->show();
+
     AbstractMainWindow menu;
     menu.show();
 
