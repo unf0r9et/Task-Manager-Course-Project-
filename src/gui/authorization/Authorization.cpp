@@ -11,9 +11,6 @@
 Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Вход в систему");
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowFlags(Qt::FramelessWindowHint);
-
-
 
 
     auto *registrationButton = new QPushButton("Reg", this);

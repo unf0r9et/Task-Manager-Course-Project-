@@ -1,16 +1,15 @@
 #include "interfaces/Interfaces.h"
-#include "AppController.h"
 
 AbstractMainWindow::AbstractMainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+    : QMainWindow(parent) {
+    //setWindowFlags(Qt::FramelessWindowHint);
     stack = new QStackedWidget(this);
     setCentralWidget(stack);
 
     controller = new AppController(stack, this);
 
     controller->showAuthorization();
+    this->setStyleSheet(R"(QWidget { background-color: #121212; })");
 
     setMinimumSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
-

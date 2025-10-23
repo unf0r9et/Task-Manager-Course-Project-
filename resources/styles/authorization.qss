@@ -1,50 +1,48 @@
-/* Authorization Menu Styles */
-
+/* Общий вид */
 QWidget {
-    background-color: #f5f5f5;
+    background-color: #121212;   /* тёмный фон */
+    color: #e0e0e0;             /* светлый текст */
     font-family: Arial, sans-serif;
 }
 
-/* Стиль для кнопки входа */
-QPushButton#loginButton {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-    stop:0 #667eea, stop:1 #764ba2);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-QPushButton#loginButton:hover {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-    stop:0 #5a6fd8, stop:1 #6a4190);
-}
-
-QPushButton#loginButton:pressed {
-    background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-    stop:0 #4c5bc6, stop:1 #58377e);
-}
-
-/* Стиль для полей ввода */
-QLineEdit {
-    border: 2px solid #ddd;
+/* Кнопки */
+QPushButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #333333;
     border-radius: 5px;
-    padding: 8px;
-    font-size: 14px;
-    min-width: 200px;
+    padding: 5px 10px;
 }
 
-QLineEdit:focus {
-    border-color: #667eea;
-    background-color: #f0f8ff;
+QPushButton:hover {
+    background-color: #333333;
 }
 
-/* Стиль для меток */
+QPushButton:pressed {
+    background-color: #555555;
+}
+
+/* Поля ввода */
+QLineEdit {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #333333;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+/* Метки */
 QLabel {
-    font-weight: bold;
-    color: #333;
-    min-width: 60px;
+    color: #e0e0e0;
+}
+
+/* Контейнеры */
+QStackedWidget {
+    background-color: #121212;
+}
+
+QToolTip {
+    background-color: #333333;
+    color: #e0e0e0;
+    border: 1px solid #555555;
 }

@@ -6,6 +6,7 @@
 
 AppController::AppController(QStackedWidget *stack, QObject *parent)
     : QObject(parent), stack(stack) {
+
     authorization = new Authorization();
     registration = new Registration();
 
@@ -15,6 +16,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(authorization, &Authorization::registerRequested, this, &AppController::showRegistration);
     //connect(authorization, &Authorization::loginSuccessful, this, &AppController::showDashboard);
     //connect(registration, &Registration::backRequested, this, &AppController::showAuthorization);
+
 }
 
 void AppController::showAuthorization() {
