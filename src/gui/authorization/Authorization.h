@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+class Registration;
 class QLineEdit;
 class QPushButton;
 
@@ -13,14 +14,14 @@ public:
     explicit Authorization(QWidget *parent = nullptr);
 private slots:
     void onLoginClicked();
+    void onRegisterClicked();
 
 private:
     void loadStylesheet(const QString &path);
-
     QLineEdit *loginEdit;
     QLineEdit *passwordEdit;
     QPushButton *loginButton;
-
+    Registration *registration;
 };
 
 #endif // AUTHORIZATION_H

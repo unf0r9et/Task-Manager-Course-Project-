@@ -10,5 +10,5 @@ int main(int argc, char *argv[]) {
     Authorization menu;
     menu.show();
 
-    return app.exec();
+    return QApplication::exec();
 }

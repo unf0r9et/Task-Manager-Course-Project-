@@ -5,11 +5,27 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QMessageBox>
-#include <QFile>
+#include <QMouseEvent>
+
 
 Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     setWindowTitle("Вход в систему");
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    //setWindowFlags(Qt::FramelessWindowHint);
+
+
+
+
+
+    auto *registrationButton = new QPushButton("Reg", this);
+
+
+
+
+    auto *photoLabel = new QLabel();
+    const QPixmap pix(":/images/authorization.png");
+    photoLabel->setPixmap(pix.scaled(WINDOW_WIDTH/2, WINDOW_HEIGHT, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
+    photoLabel->setAlignment(Qt::AlignCenter);
 
 
     loginEdit = new QLineEdit(this);
@@ -20,42 +36,45 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
 
     auto *loginLabel = new QLabel("Логин:", this);
     auto *passwordLabel = new QLabel("Пароль:", this);
+
     loginButton = new QPushButton("Войти", this);
+    loginButton->setObjectName("loginButton");
     loginButton->setFixedWidth(200);
-
-    auto *mainLayout = new QVBoxLayout();
-
-    auto *formWidget = new QWidget(this);
-    auto *formLayout = new QVBoxLayout(formWidget);
 
 
     auto *loginLayout = new QHBoxLayout();
-    auto *passwordLayout = new QHBoxLayout();
-
+    loginLayout->addStretch();
     loginLayout->addWidget(loginLabel);
-    loginLayout->addSpacing(17);
     loginLayout->addWidget(loginEdit);
     loginLayout->addStretch();
 
 
-
+    auto *passwordLayout = new QHBoxLayout();
+    passwordLayout->addStretch();
     passwordLayout->addWidget(passwordLabel);
-    passwordLayout->addSpacing(8);
     passwordLayout->addWidget(passwordEdit);
     passwordLayout->addStretch();
 
+    auto buttonLayout = new QHBoxLayout();
+    buttonLayout->addStretch();
+    buttonLayout->addWidget(loginButton);
+    buttonLayout->addStretch();
 
-    formLayout->addLayout(loginLayout);
-    formLayout->addSpacing(20);
-    formLayout->addLayout(passwordLayout);
-    formLayout->addSpacing(20);
-    formLayout->addWidget(loginButton, 1, Qt::AlignRight);
 
-    mainLayout->addStretch();
-    mainLayout->addWidget(formWidget,0 ,Qt::AlignHCenter);
-    mainLayout->addStretch();
+    auto *authorizationLayout = new QVBoxLayout();
+    authorizationLayout->addStretch();
+    authorizationLayout->addLayout(loginLayout);
+    authorizationLayout->addLayout(passwordLayout);
+    authorizationLayout->addLayout(buttonLayout);
+    authorizationLayout->addStretch();
+
+    auto *mainLayout = new QHBoxLayout();
+    mainLayout->addWidget(photoLabel);
+    mainLayout->addLayout(authorizationLayout);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
 
     setLayout(mainLayout);
+
     loadStylesheet(":/styles/authorization.qss");
     connect(loginButton, &QPushButton::clicked, this, &Authorization::onLoginClicked);
 }
@@ -64,7 +83,7 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
 void Authorization::loadStylesheet(const QString &path) {
     QFile file(path);
     if (file.open(QFile::ReadOnly | QFile::Text)) {
-        QString styleSheet = QLatin1String(file.readAll());
+        const QString styleSheet = QLatin1String(file.readAll());
         this->setStyleSheet(styleSheet);
         file.close();
     }
@@ -77,3 +96,9 @@ void Authorization::onLoginClicked() {
     else
         QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль.");
 }
+
+void Authorization::onRegisterClicked() {
+    auto *registration = new Registration(this);
+    registration->show();
+}
+
