@@ -4,29 +4,28 @@
 
 AbstractMainWindow::AbstractMainWindow(QWidget *parent)
     : QMainWindow(parent) {
-
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setObjectName("MAINWINDOW");
-    setWindowFlags(Qt::FramelessWindowHint);
+    //setWindowFlags(Qt::FramelessWindowHint);
 
 
-    QWidget *central = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(central);
-    layout->setContentsMargins(0,0,0,0);
-    layout->setSpacing(0);
-
-    TitleBar *titleBar = new TitleBar(this);
-    layout->addWidget(titleBar);
+    // // QWidget *central = new QWidget(this);
+    // auto *layout = new QVBoxLayout();
+    // // layout->setContentsMargins(0,0,0,0);
+    // // layout->setSpacing(0);
+    //
+    // auto *titleBar = new TitleBar(this);
+    //
+    //
+    //
+    // // layout->addWidget(titleBar);
 
     stack = new QStackedWidget(this);
-    layout->addWidget(stack);
 
-    central->setLayout(layout);
-    setCentralWidget(central);
+    setCentralWidget(stack);
 
     controller = new AppController(stack, this);
 
     controller->showAuthorization();
 
-    this->setStyleSheet(R"(QWidget { background-color: #121212; })");
+    //this->setStyleSheet(R"(QWidget { background-color: #121212; })");
 }

@@ -6,7 +6,7 @@
 /* Base styling */
 
 #titleBar {
-    background-color: #000000; /* чёрный фон */
+    background-color: #333333;
 }
 
 

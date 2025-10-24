@@ -11,6 +11,9 @@ int main(int argc, char *argv[]) {
     //
     // titleBar->show();
 
+    // auto afaf = new Authorization();
+    // afaf->show();
+    //
     AbstractMainWindow menu;
     menu.show();
 

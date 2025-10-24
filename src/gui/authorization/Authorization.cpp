@@ -10,25 +10,15 @@
 
 
 Authorization::Authorization(QWidget *parent) : QWidget(parent) {
-    setWindowTitle("Вход в систему");
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setObjectName("Authorization");
+    setAttribute(Qt::WA_StyledBackground, true);
 
-
-    auto *registrationButton = new QPushButton("Reg", this);
-    auto *registrationLayout = new QHBoxLayout();
-    registrationLayout->addStretch();
-    registrationLayout->addWidget(registrationButton);
-    registrationLayout->addStretch();
-
-
-    auto *photoLabel = new QLabel();
     const QPixmap pix(":/images/authorization.png");
-    photoLabel->setPixmap(pix.scaled(WINDOW_WIDTH/2, WINDOW_HEIGHT, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation));
-    photoLabel->setAlignment(Qt::AlignCenter);
-
 
     loginEdit = new QLineEdit(this);
     loginEdit->setFixedWidth(200);
+
     passwordEdit = new QLineEdit(this);
     passwordEdit->setFixedWidth(200);
     passwordEdit->setEchoMode(QLineEdit::Password);
@@ -40,26 +30,39 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     loginButton->setObjectName("loginButton");
     loginButton->setFixedWidth(200);
 
+    auto *registrationButton = new QPushButton("Reg", this);
 
+    /*------------------------------------------------------------------------------------
+    * -----------------------------------------------------------------------------------
+    ------------------------------------------------------------------------------------*/
+
+    //---------------------------------------------------LOGIN
     auto *loginLayout = new QHBoxLayout();
     loginLayout->addStretch();
     loginLayout->addWidget(loginLabel);
     loginLayout->addWidget(loginEdit);
     loginLayout->addStretch();
 
-
+    //---------------------------------------------------PASSWORD
     auto *passwordLayout = new QHBoxLayout();
     passwordLayout->addStretch();
     passwordLayout->addWidget(passwordLabel);
     passwordLayout->addWidget(passwordEdit);
     passwordLayout->addStretch();
 
+    //---------------------------------------------------BUTTON_ACCEPT
     auto buttonLayout = new QHBoxLayout();
     buttonLayout->addStretch();
     buttonLayout->addWidget(loginButton);
     buttonLayout->addStretch();
 
+    //---------------------------------------------------BUTTON_REGISTRATION
+    auto *registrationLayout = new QHBoxLayout();
+    registrationLayout->addStretch();
+    registrationLayout->addWidget(registrationButton);
+    registrationLayout->addStretch();
 
+    //---------------------------------------------------AUTHORIZATION
     auto *authorizationLayout = new QVBoxLayout();
     authorizationLayout->addStretch();
     authorizationLayout->addLayout(loginLayout);
@@ -68,6 +71,13 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     authorizationLayout->addLayout(registrationLayout);
     authorizationLayout->addStretch();
 
+    //---------------------------------------------------PHOTO
+    auto *photoLabel = new QLabel();
+    photoLabel->setPixmap(pix.scaled(WINDOW_WIDTH / 2, WINDOW_HEIGHT, Qt::KeepAspectRatioByExpanding,
+                                     Qt::SmoothTransformation));
+    photoLabel->setAlignment(Qt::AlignCenter);
+
+    //---------------------------------------------------MAINLAYOUT
     auto *mainLayout = new QHBoxLayout();
     mainLayout->addWidget(photoLabel);
     mainLayout->addLayout(authorizationLayout);
@@ -75,13 +85,15 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
 
     setLayout(mainLayout);
 
-    StyleLoader::loadStyleSheet(this, ":/styles/authorization.qss");
-
+    /*------------------------------------------------------------------------------------
+     * -----------------------------------------------------------------------------------
+     ------------------------------------------------------------------------------------*/
 
     connect(loginButton, &QPushButton::clicked, this, &Authorization::onLoginClicked);
     connect(registrationButton, &QPushButton::clicked, this, &Authorization::onRegisterClicked);
-}
 
+    StyleLoader::loadStyleSheet(this, ":/styles/authorization.qss");
+}
 
 
 void Authorization::onLoginClicked() {
@@ -94,4 +106,3 @@ void Authorization::onLoginClicked() {
 void Authorization::onRegisterClicked() {
     emit registerRequested();
 }
-
