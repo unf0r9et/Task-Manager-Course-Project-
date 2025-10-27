@@ -11,6 +11,10 @@ class AbstractMainWindow : public QMainWindow
 public:
     explicit AbstractMainWindow(QWidget *parent = nullptr);
 
+
+    protected:
+    void mousePressEvent(QMouseEvent *event) override;
+
 private:
     QStackedWidget *stack;
     AppController *controller;

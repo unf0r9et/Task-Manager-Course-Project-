@@ -1,22 +1,20 @@
 #include <qboxlayout.h>
 
 #include "interfaces/Interfaces.h"
+#include <QWindow>
 
 AbstractMainWindow::AbstractMainWindow(QWidget *parent)
     : QMainWindow(parent) {
-    resize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setMinimumSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setMaximumSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setWindowFlags(Qt::FramelessWindowHint | Qt::Window | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint);
 
-
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT + TITLEBAR_HEIGHT);
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
 
     QWidget *central = new QWidget(this);
     auto *layout = new QVBoxLayout();
     layout->setContentsMargins(0,0,0,0);
     layout->setSpacing(0);
 
-    auto *titleBar = new TitleBar(nullptr);
+    auto *titleBar = new TitleBar(this);
     layout->addWidget(titleBar);
 
     stack = new QStackedWidget(this);
@@ -25,9 +23,24 @@ AbstractMainWindow::AbstractMainWindow(QWidget *parent)
     central->setLayout(layout);
     setCentralWidget(central);
 
+
     controller = new AppController(stack, this);
 
-    controller->showAuthorization();
+   controller->showAuthorization();
 
-    this->setStyleSheet(R"(QWidget { background-color: #121212; })");
+   //  this->setStyleSheet(R"(QWidget { background-color: #121212; })");
+}
+
+void AbstractMainWindow::mousePressEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton) {
+
+        int clickY = event->pos().y();
+
+        if (clickY >= 0 && clickY <= TITLEBAR_HEIGHT) {
+            if (this->windowHandle()) {
+                this->windowHandle()->startSystemMove();
+            }
+        }
+    }
+    QMainWindow::mousePressEvent(event);
 }
