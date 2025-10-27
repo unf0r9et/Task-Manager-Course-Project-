@@ -1,12 +1,13 @@
-#include "interfaces/Interfaces.h"
-#include "StyleLoader.cpp"
 #include <QLineEdit>
 #include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
-#include <QMouseEvent>
-
 #include <QMessageBox>
+
+#include "Authorization.h"
+#include "interfaces/WindowOptions.h"
+#include "StyleLoader.cpp"
+
 
 Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);

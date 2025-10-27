@@ -1,9 +1,6 @@
-//
-// Created by unf0r9et on 23.10.25.
-//
-
 #ifndef APPCONTROLLER_H
 #define APPCONTROLLER_H
+
 #include <QObject>
 #include <interfaces/Interfaces.h>
 
@@ -16,6 +13,7 @@ public:
 
 public slots:
     void showAuthorization();
+
     void showRegistration();
 
 private:

@@ -7,8 +7,4 @@
 #include "../../src/gui/AppController.h"
 #include "../../src/gui/titlebar/TitleBar.h"
 
-#define WINDOW_HEIGHT 900
-#define TITLEBAR_HEIGHT 35
-#define WINDOW_WIDTH 1400
-
 #endif //MENU_H

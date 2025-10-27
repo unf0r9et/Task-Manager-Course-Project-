@@ -1,12 +1,7 @@
-//
-// Created by unf0r9et on 23.10.25.
-//
-// AppController.cpp
 #include "AppController.h"
 
 AppController::AppController(QStackedWidget *stack, QObject *parent)
     : QObject(parent), stack(stack) {
-
     authorization = new Authorization();
     registration = new Registration();
 
@@ -15,7 +10,6 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
 
     connect(authorization, &Authorization::registerRequested, this, &AppController::showRegistration);
     connect(registration, &Registration::authorizationRequested, this, &AppController::showAuthorization);
-
 }
 
 void AppController::showAuthorization() {
@@ -25,4 +19,3 @@ void AppController::showAuthorization() {
 void AppController::showRegistration() {
     stack->setCurrentWidget(registration);
 }
-

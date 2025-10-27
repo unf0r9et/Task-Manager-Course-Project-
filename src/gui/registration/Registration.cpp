@@ -1,14 +1,10 @@
-//
-// Created by unf0r9et on 23.10.25.
-//
-
 #include <QHBoxLayout>
 #include <QPushButton>
-#include <stack>
-#include <stack>
 
-#include "interfaces/Interfaces.h"
 
+#include "Registration.h"
+#include "interfaces/WindowOptions.h"
+#include "StyleLoader.cpp"
 
 Registration::Registration(QWidget *parent) : QWidget(parent) {
     setWindowTitle(tr("Registration"));
@@ -34,8 +30,6 @@ Registration::Registration(QWidget *parent) : QWidget(parent) {
     this->setStyleSheet(R"(
 QPushButton { color: 000000; })");
     connect(button, &QPushButton::clicked, this, &Registration::backToAuthorization);
-
-
 }
 
 void Registration::backToAuthorization() {

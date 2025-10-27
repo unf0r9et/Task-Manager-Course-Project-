@@ -1,14 +1,7 @@
-//
-// Created by unf0r9et on 24.10.25.
-//
-
 #ifndef TITLEBAR_H
 #define TITLEBAR_H
 
-#include <QMouseEvent>
 #include <QWidget>
-#include <QDebug>
-#include <QWindow>
 
 class QPushButton;
 
