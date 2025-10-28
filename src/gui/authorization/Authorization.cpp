@@ -17,14 +17,14 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     const QPixmap pix(":/images/authorization.png");
 
     loginEdit = new QLineEdit(this);
+    loginEdit->setPlaceholderText("LOGIN");
     loginEdit->setFixedWidth(200);
 
     passwordEdit = new QLineEdit(this);
+    passwordEdit->setPlaceholderText("PASSWORD");
     passwordEdit->setFixedWidth(200);
     passwordEdit->setEchoMode(QLineEdit::Password);
 
-    auto *loginLabel = new QLabel("Логин:", this);
-    auto *passwordLabel = new QLabel("Пароль:", this);
 
     loginButton = new QPushButton("Войти", this);
     loginButton->setObjectName("loginButton");
@@ -39,14 +39,12 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     //---------------------------------------------------LOGIN
     auto *loginLayout = new QHBoxLayout();
     loginLayout->addStretch();
-    loginLayout->addWidget(loginLabel);
     loginLayout->addWidget(loginEdit);
     loginLayout->addStretch();
 
     //---------------------------------------------------PASSWORD
     auto *passwordLayout = new QHBoxLayout();
     passwordLayout->addStretch();
-    passwordLayout->addWidget(passwordLabel);
     passwordLayout->addWidget(passwordEdit);
     passwordLayout->addStretch();
 
