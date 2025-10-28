@@ -4,6 +4,10 @@ project(TaskManager)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(CURL REQUIRED)
+
+find_package(nlohmann_json QUIET)
+
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
@@ -28,6 +32,11 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
 add_executable(TaskManager
         ${PROJECT_SOURCES}
         ${RESOURCES}
+)
+
+target_link_libraries(TaskManager
+        Qt5::Widgets
+        CURL::libcurl
 )
 
 target_link_libraries(TaskManager Qt5::Widgets)
