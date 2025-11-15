@@ -4,8 +4,8 @@
 
 #include "interfaces/WindowOptions.h"
 #include "AbstractMainWindow.h"
-#include "titlebar/TitleBar.h"
-#include "AppController.h"
+#include "../titlebar/TitleBar.h"
+#include "../appController/AppController.h"
 
 AbstractMainWindow::AbstractMainWindow(QWidget *parent)
     : QMainWindow(parent) {
