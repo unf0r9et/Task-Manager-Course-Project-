@@ -1,0 +1,30 @@
+ #include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/core/ChatBot/ChatBot.h"
+
+ auto *layout = new QVBoxLayout(this);
+
+    auto *input = new QLineEdit();
+    auto *output = new QLabel("Введите вопрос и нажмите Enter");
+
+    layout->addWidget(input);
+    layout->addWidget(output);
+
+    // 🔹 Когда пользователь нажимает Enter:
+    connect(input, &QLineEdit::returnPressed, this, [=]() {
+        QString request = input->text();
+        std::string requestSTD = request.toStdString();
+
+        std::string access_token = ChatBot::get_access_token();
+        if (access_token.empty()) {
+            output->setText("Ошибка: не удалось получить Access Token");
+            return;
+        }
+
+        std::string response = ChatBot::extractContent(
+            ChatBot::send_request_to_gigachat(requestSTD, access_token)
+        );
+
+        if (response.empty())
+            output->setText("Ошибка: пустой ответ от GigaChat");
+        else
+            output->setText(QString::fromStdString(response));
+    });

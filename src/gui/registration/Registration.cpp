@@ -3,68 +3,96 @@
 
 
 #include "Registration.h"
-
+#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/utils/databaseManager/DatabaseManager.h"
+#include <QCryptographicHash>
 #include <QLabel>
 #include <QLineEdit>
+#include <QMessageBox>
 
 #include "interfaces/WindowOptions.h"
 #include "StyleLoader.cpp"
 
-#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/core/ChatBot/ChatBot.h"
 
 Registration::Registration(QWidget *parent) : QWidget(parent) {
     setWindowTitle(tr("Registration"));
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    auto *layout = new QVBoxLayout(this);
 
-    auto *input = new QLineEdit();
-    auto *output = new QLabel("Введите вопрос и нажмите Enter");
+    loginEdit = new QLineEdit(this);
+    loginEdit->setPlaceholderText("ENTER NEW LOGIN");
+    loginEdit->setFixedWidth(200);
 
-    layout->addWidget(input);
-    layout->addWidget(output);
 
-    // 🔹 Когда пользователь нажимает Enter:
-    connect(input, &QLineEdit::returnPressed, this, [=]() {
-        QString request = input->text();
-        std::string requestSTD = request.toStdString();
+    passwordEdit = new QLineEdit(this);
+    passwordEdit->setPlaceholderText("ENTER NEW PASSWORD");
+    passwordEdit->setFixedWidth(200);
 
-        std::string access_token = ChatBot::get_access_token();
-        if (access_token.empty()) {
-            output->setText("Ошибка: не удалось получить Access Token");
-            return;
-        }
+    registrationButton = new QPushButton(this);
+    registrationButton->setFixedWidth(200);
 
-        std::string response = ChatBot::extractContent(
-            ChatBot::send_request_to_gigachat(requestSTD, access_token)
-        );
 
-        if (response.empty())
-            output->setText("Ошибка: пустой ответ от GigaChat");
-        else
-            output->setText(QString::fromStdString(response));
-    });
-//     auto *button = new QPushButton(this);
-//     button->setText("BACK");
-//     button->setFixedWidth(200);
-//     button->setFixedHeight(100);
-//
-//     auto *buttonLayout = new QHBoxLayout();
-//     buttonLayout->addStretch();
-//     buttonLayout->addWidget(button);
-//     buttonLayout->addStretch();
-//
-//     auto *mainLayout = new QVBoxLayout();
-//     mainLayout->addStretch();
-//     mainLayout->addLayout(buttonLayout);
-//     mainLayout->addStretch();
-//
-//     setLayout(mainLayout);
-//
-//     this->setStyleSheet(R"(
-// QPushButton { color: 000000; })");
-//     connect(button, &QPushButton::clicked, this, &Registration::backToAuthorization);
+    // auto *button = new QPushButton(this);
+    // button->setText("BACK");
+    // button->setFixedWidth(200);
+    // button->setFixedHeight(100);
+
+    auto *buttonLayout = new QHBoxLayout();
+    buttonLayout->addStretch();
+
+    //buttonLayout->addWidget(button);
+    buttonLayout->addStretch();
+
+    auto *mainLayout = new QVBoxLayout();
+    mainLayout->addStretch();
+    //mainLayout->addLayout(buttonLayout);
+    mainLayout->addWidget(loginEdit);
+    mainLayout->addWidget(passwordEdit);
+    mainLayout->addWidget(registrationButton);
+    mainLayout->addStretch();
+
+    setLayout(mainLayout);
+
+    this->setStyleSheet(R"(
+QPushButton { color: 000000; })");
+    //connect(button, &QPushButton::clicked, this, &Registration::backToAuthorization);
+    connect(registrationButton, &QPushButton::clicked, this, &Registration::registeringNewAccount);
 }
 
 void Registration::backToAuthorization() {
     emit authorizationRequested();
+}
+
+void Registration::setDatabaseManager(DatabaseManager *dbManager) {
+    this->dbManager = dbManager;
+}
+
+
+void Registration::registeringNewAccount() {
+    if (!dbManager) {
+        QMessageBox::critical(this, "Error", "Database manager is not set!");
+        return;
+    }
+    QString username = loginEdit->text().trimmed();
+    QString password = passwordEdit->text();
+
+    if (username.isEmpty() || password.isEmpty()) {
+        QMessageBox::warning(this, "Error", "Username and password cannot be empty.");
+        return;
+    }
+
+    if (dbManager) {
+        if (dbManager->userExists(username)) {
+            QMessageBox::warning(this, "Error", "Username already exists.");
+            return;
+        }
+
+        QString passwordHash = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256).toHex());
+        if (dbManager->addUser(username, passwordHash)) {
+            QMessageBox::information(this, "Success", "User registered successfully!");
+            emit authorizationRequested();
+        } else {
+            QMessageBox::critical(this, "Error", "Failed to register user.");
+        }
+    } else {
+        QMessageBox::critical(this, "Error", "Database is not initialized.");
+    }
 }

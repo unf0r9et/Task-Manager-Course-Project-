@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <interfaces/Interfaces.h>
-
+#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/utils/databaseManager/DatabaseManager.h"
 
 class AppController : public QObject {
     Q_OBJECT
@@ -13,13 +13,13 @@ public:
 
 public slots:
     void showAuthorization();
-
     void showRegistration();
 
 private:
     QStackedWidget *stack;
     Authorization *authorization;
     Registration *registration;
+    DatabaseManager dbManager;
 };
 
 

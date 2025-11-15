@@ -4,11 +4,10 @@ project(TaskManager)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
+
 find_package(CURL REQUIRED)
-
 find_package(nlohmann_json QUIET)
-
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -28,7 +27,6 @@ file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
         ${CMAKE_CURRENT_SOURCE_DIR}/src/*.h
 )
 
-
 add_executable(TaskManager
         ${PROJECT_SOURCES}
         ${RESOURCES}
@@ -36,7 +34,6 @@ add_executable(TaskManager
 
 target_link_libraries(TaskManager
         Qt5::Widgets
+        Qt5::Sql
         CURL::libcurl
 )
-
-target_link_libraries(TaskManager Qt5::Widgets)
