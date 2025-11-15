@@ -1,19 +1,23 @@
-#ifndef ADDTASKDIALOG_H
-#define ADDTASKDIALOG_H
+#ifndef ADDTASKWIDGET_H
+#define ADDTASKWIDGET_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QDateEdit>
 #include <QComboBox>
+#include <QPushButton>
 
 class DatabaseManager;
 
-class AddTaskDialog : public QDialog {
+class AddTaskWidget : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AddTaskDialog(DatabaseManager *dbManager, QWidget *parent = nullptr);
+    explicit AddTaskWidget(DatabaseManager *dbManager, QWidget *parent = nullptr);
+
+    signals:
+        void taskAdded();  // Сигнал, что задача добавлена
 
 private slots:
     void onAcceptClicked();
@@ -24,6 +28,8 @@ private:
     QTextEdit *descriptionEdit = nullptr;
     QComboBox *categoryCombo = nullptr;
     QDateEdit *deadlineEdit = nullptr;
+    QPushButton *acceptButton = nullptr;
+    QPushButton *cancelButton = nullptr;
 };
 
-#endif // ADDTASKDIALOG_H
+#endif // ADDTASKWIDGET_H

@@ -1,14 +1,14 @@
+#include "AddTaskWidget.h"
+#include "databaseManager/DatabaseManager.h"
+#include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPushButton>
 #include <QMessageBox>
-#include <QDialogButtonBox>
 
-#include "AddTaskDialog.h"
-#include "databaseManager/DatabaseManager.h"
-
-AddTaskDialog::AddTaskDialog(DatabaseManager *dbManager, QWidget *parent)
-    : QDialog(parent), dbManager(dbManager) {
-    setWindowTitle("Add Task");
+AddTaskWidget::AddTaskWidget(DatabaseManager *dbManager, QWidget *parent)
+    : QWidget(parent), dbManager(dbManager) {
+    setObjectName("AddTaskWidget");
 
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Task title");
@@ -23,7 +23,12 @@ AddTaskDialog::AddTaskDialog(DatabaseManager *dbManager, QWidget *parent)
     deadlineEdit->setDate(QDate::currentDate());
     deadlineEdit->setCalendarPopup(true);
 
-    auto *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    acceptButton = new QPushButton("Add Task", this);
+    cancelButton = new QPushButton("Cancel", this);
+
+    auto *buttonLayout = new QHBoxLayout();
+    buttonLayout->addWidget(acceptButton);
+    buttonLayout->addWidget(cancelButton);
 
     auto *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(new QLabel("Title:", this));
@@ -34,13 +39,16 @@ AddTaskDialog::AddTaskDialog(DatabaseManager *dbManager, QWidget *parent)
     mainLayout->addWidget(categoryCombo);
     mainLayout->addWidget(new QLabel("Deadline:", this));
     mainLayout->addWidget(deadlineEdit);
-    mainLayout->addWidget(buttonBox);
+    mainLayout->addLayout(buttonLayout);
 
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &AddTaskDialog::onAcceptClicked);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &AddTaskDialog::reject);
+    connect(acceptButton, &QPushButton::clicked, this, &AddTaskWidget::onAcceptClicked);
+    connect(cancelButton, &QPushButton::clicked, this, [this]() {
+        emit taskAdded(); // Или просто скрываем
+        this->hide();
+    });
 }
 
-void AddTaskDialog::onAcceptClicked() {
+void AddTaskWidget::onAcceptClicked() {
     QString title = titleEdit->text().trimmed();
     if (title.isEmpty()) {
         QMessageBox::warning(this, "Error", "Title cannot be empty.");
@@ -53,7 +61,11 @@ void AddTaskDialog::onAcceptClicked() {
 
     if (dbManager) {
         if (dbManager->addTask(title, description, category, deadline)) {
-            accept();
+            emit taskAdded(); // Сообщаем, что задача добавлена
+            // Можно очистить поля
+            titleEdit->clear();
+            descriptionEdit->clear();
+            this->hide(); // Скрываем
         } else {
             QMessageBox::critical(this, "Error", "Failed to add task.");
         }
