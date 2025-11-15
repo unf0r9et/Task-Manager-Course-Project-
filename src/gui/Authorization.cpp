@@ -3,7 +3,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 
-#include "Authorization.h"
+#include "../windows/Authorization.h"
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
 

@@ -6,7 +6,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 
-#include "authorization/Authorization.h"
+#include "../../windows/Authorization.h"
 #include "databaseManager/DatabaseManager.h"
 
 void Authorization::setDatabaseManager(DatabaseManager *dbManager) {

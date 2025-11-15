@@ -12,9 +12,7 @@ DatabaseManager::DatabaseManager(QObject *parent)
 }
 
 bool DatabaseManager::initDatabase() {
-    QString path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    QDir().mkpath(path);
-    db.setDatabaseName(path + "/taskmanager.db");
+    db.setDatabaseName("/home/unf0r9et/myProject/CourseProject/TaskManager/data/taskmanager.db");
 
     if (!db.open()) {
         qDebug() << "Failed to open database:" << db.lastError().text();

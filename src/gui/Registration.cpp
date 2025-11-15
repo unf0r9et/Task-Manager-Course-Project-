@@ -1,7 +1,7 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 
-#include "Registration.h"
+#include "../windows/Registration.h"
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
 
@@ -44,8 +44,7 @@ Registration::Registration(QWidget *parent) : QWidget(parent) {
 
     setLayout(mainLayout);
 
-    this->setStyleSheet(R"(
-QPushButton { color: 000000; })");
     //connect(button, &QPushButton::clicked, this, &Registration::backToAuthorization);
     connect(registrationButton, &QPushButton::clicked, this, &Registration::registeringNewAccount);
+    StyleLoader::loadStyleSheet(this, "");
 }

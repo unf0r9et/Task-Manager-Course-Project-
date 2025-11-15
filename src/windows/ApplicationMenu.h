@@ -1,0 +1,41 @@
+//
+// Created by unf0r9et on 15.11.25.
+//
+
+#ifndef APPLICATIONMENU_H
+#define APPLICATIONMENU_H
+
+#include <QWidget>
+#include <QPushButton>
+
+class ApplicationMenu : public QWidget {
+    Q_OBJECT
+
+public:
+    explicit ApplicationMenu(QWidget *parent = nullptr);
+
+    signals:
+    void editTasksRequested();
+    void progressWidgetRequested();
+    void chatBotWidgetRequested();
+    void statisticsWidgetRequested();
+    void calendarWidgetRequested();
+
+    private slots:
+    void editTasksClicked();
+    void progressClicked();
+    void chatBotClicked();
+    void statisticsClicked();
+    void calendarClicked();
+
+    private:
+    QPushButton *editTasksButton;
+    QPushButton *progressButton;
+    QPushButton *chatBotButton;
+    QPushButton *statisticsButton;
+    QPushButton *calendarButton;
+
+};
+
+
+#endif //APPLICATIONMENU_H
