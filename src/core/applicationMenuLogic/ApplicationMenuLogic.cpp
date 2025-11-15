@@ -5,16 +5,21 @@
 #include "../../windows/ApplicationMenu.h"
 
 void ApplicationMenu::editTasksClicked() {
+    emit editTasksRequested();
 }
 
 void ApplicationMenu::progressClicked() {
+    emit progressWidgetRequested();
 }
 
 void ApplicationMenu::chatBotClicked() {
+    emit chatBotWidgetRequested();
 }
 
 void ApplicationMenu::statisticsClicked() {
+    emit statisticsWidgetRequested();
 }
 
 void ApplicationMenu::calendarClicked() {
+    emit calendarWidgetRequested();
 }

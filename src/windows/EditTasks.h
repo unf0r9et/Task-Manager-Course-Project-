@@ -7,6 +7,7 @@
 #include <QWidget>
 
 class DatabaseManager;
+class QPushButton;
 
 class EditTasks : public QWidget {
     Q_OBJECT
@@ -17,6 +18,10 @@ public:
 
     private:
     DatabaseManager *dbManager;
+    QPushButton *addTaskButton = nullptr;
+    void onAddTaskButtonClicked();
+
+    void showAllTasks();
 };
 
 

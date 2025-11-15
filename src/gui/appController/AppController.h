@@ -18,11 +18,14 @@ public slots:
 
     void showApplicationMenu();
 
+    void showEditTasks();
+
 private:
     QStackedWidget *stack;
     Authorization *authorization;
     Registration *registration;
     ApplicationMenu *applicationMenu;
+    EditTasks *editTasks;
     DatabaseManager dbManager;
 };
 
