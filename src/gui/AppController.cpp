@@ -4,14 +4,12 @@
 
 AppController::AppController(QStackedWidget *stack, QObject *parent)
     : QObject(parent), stack(stack) {
-
     if (!dbManager.initDatabase()) {
-
     }
 
     authorization = new Authorization();
     registration = new Registration();
-
+    applicationMenu = new ApplicationMenu();
 
     registration->setDatabaseManager(&dbManager);
     authorization->setDatabaseManager(&dbManager);
@@ -19,9 +17,12 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
 
     stack->addWidget(authorization);
     stack->addWidget(registration);
+    stack->addWidget(applicationMenu);
+
 
     connect(authorization, &Authorization::registerRequested, this, &AppController::showRegistration);
     connect(registration, &Registration::authorizationRequested, this, &AppController::showAuthorization);
+    connect(authorization, &Authorization::loginSuccessful, this, &AppController::showApplicationMenu);
 }
 
 void AppController::showAuthorization() {
@@ -30,4 +31,8 @@ void AppController::showAuthorization() {
 
 void AppController::showRegistration() {
     stack->setCurrentWidget(registration);
+}
+
+void AppController::showApplicationMenu() {
+    stack->setCurrentWidget(applicationMenu);
 }

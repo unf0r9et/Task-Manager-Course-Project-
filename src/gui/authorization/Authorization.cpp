@@ -2,12 +2,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QHBoxLayout>
-#include <QMessageBox>
-#include "databaseManager/DatabaseManager.h"
+
 #include "Authorization.h"
-
-#include <QCryptographicHash>
-
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
 
@@ -96,41 +92,3 @@ Authorization::Authorization(QWidget *parent) : QWidget(parent) {
     StyleLoader::loadStyleSheet(this, ":/styles/authorization.qss");
 }
 
-void Authorization::setDatabaseManager(DatabaseManager *dbManager) {
-    this->dbManager = dbManager;
-}
-
-void Authorization::onLoginClicked() {
-    if (checkingLoginAndPassword())
-        QMessageBox::information(this, "Успех", "Добро пожаловать, admin!");
-    else
-        QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль.");
-}
-
-
-void Authorization::onRegisterClicked() {
-    emit registerRequested();
-}
-
-bool Authorization::checkingLoginAndPassword() {
-    QString username = loginEdit->text().trimmed();
-    QString password = passwordEdit->text();
-
-    if (username.isEmpty() || password.isEmpty()) {
-        return false;
-    }
-
-    if (!dbManager) {
-        return false;
-    }
-
-    QString storedHash = dbManager->getPasswordHash(username);
-
-    if (storedHash.isEmpty()) {
-        return false;
-    }
-
-    QString inputHash = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256).toHex());
-
-    return inputHash == storedHash;
-}

@@ -16,10 +16,13 @@ public slots:
 
     void showRegistration();
 
+    void showApplicationMenu();
+
 private:
     QStackedWidget *stack;
     Authorization *authorization;
     Registration *registration;
+    ApplicationMenu *applicationMenu;
     DatabaseManager dbManager;
 };
 

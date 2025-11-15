@@ -7,6 +7,7 @@ class Registration;
 class QLineEdit;
 class QPushButton;
 class DatabaseManager;
+
 class Authorization : public QWidget {
     Q_OBJECT
 
@@ -16,6 +17,7 @@ public:
 
 signals:
     void registerRequested();
+    void loginSuccessful();
 
 private slots:
     void onLoginClicked();
