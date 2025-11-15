@@ -4,14 +4,17 @@
 
 AppController::AppController(QStackedWidget *stack, QObject *parent)
     : QObject(parent), stack(stack) {
+
     if (!dbManager.initDatabase()) {
 
     }
+
     authorization = new Authorization();
     registration = new Registration();
 
 
     registration->setDatabaseManager(&dbManager);
+    authorization->setDatabaseManager(&dbManager);
 
 
     stack->addWidget(authorization);

@@ -1,4 +1,6 @@
 #include <QApplication>
+
+#include "gui/AbstractMainWindow.h"
 #include "interfaces/Interfaces.h"
 
 int main(int argc, char *argv[]) {

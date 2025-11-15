@@ -1,16 +1,11 @@
-#include <qfile.h>
+#include "StyleLoader.h"
+#include <QFile>
+#include <QApplication>
 #include <QWidget>
-//
-// Created by unf0r9et on 24.10.25.
-//
 
-
-namespace StyleLoader {
-    inline void loadStyleSheet(QWidget *widget, const QString &path) {
-        QFile file(path);
-        if(file.open(QFile::ReadOnly | QFile::Text)) {
-            const QString styleSheet = QLatin1String(file.readAll());
-            widget->setStyleSheet(styleSheet);
-        }
+void StyleLoader::loadStyleSheet(QWidget* widget, const QString& path) {
+    QFile file(path);
+    if (file.open(QFile::ReadOnly)) {
+        widget->setStyleSheet(file.readAll());
     }
 }

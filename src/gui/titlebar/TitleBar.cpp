@@ -9,7 +9,7 @@
 
 #include "TitleBar.h"
 #include "interfaces/WindowOptions.h"
-#include "StyleLoader.cpp"
+#include "styleloader/StyleLoader.h"
 
 TitleBar::TitleBar(QWidget *parent) : QWidget(parent) {
     setWindowFlags(Qt::FramelessWindowHint);

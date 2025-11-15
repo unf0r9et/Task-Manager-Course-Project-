@@ -3,14 +3,13 @@
 
 
 #include "Registration.h"
-#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/utils/databaseManager/DatabaseManager.h"
+#include "databaseManager/DatabaseManager.h"
 #include <QCryptographicHash>
-#include <QLabel>
 #include <QLineEdit>
 #include <QMessageBox>
 
 #include "interfaces/WindowOptions.h"
-#include "StyleLoader.cpp"
+#include "styleloader/StyleLoader.h"
 
 
 Registration::Registration(QWidget *parent) : QWidget(parent) {
@@ -64,7 +63,6 @@ void Registration::backToAuthorization() {
 void Registration::setDatabaseManager(DatabaseManager *dbManager) {
     this->dbManager = dbManager;
 }
-
 
 void Registration::registeringNewAccount() {
     if (!dbManager) {
