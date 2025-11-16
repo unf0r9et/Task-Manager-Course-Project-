@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QLineEdit>
+#include <QDialog>
 #include <QTextEdit>
 #include <QDateEdit>
 #include <QComboBox>
@@ -10,14 +11,11 @@
 
 class DatabaseManager;
 
-class AddTaskWidget : public QWidget {
+class AddTaskDialog : public QDialog {
     Q_OBJECT
 
 public:
-    explicit AddTaskWidget(DatabaseManager *dbManager, QWidget *parent = nullptr);
-
-    signals:
-        void taskAdded();  // Сигнал, что задача добавлена
+    explicit AddTaskDialog(DatabaseManager *dbManager, QWidget *parent = nullptr);
 
 private slots:
     void onAcceptClicked();
@@ -28,8 +26,6 @@ private:
     QTextEdit *descriptionEdit = nullptr;
     QComboBox *categoryCombo = nullptr;
     QDateEdit *deadlineEdit = nullptr;
-    QPushButton *acceptButton = nullptr;
-    QPushButton *cancelButton = nullptr;
 };
 
 #endif // ADDTASKWIDGET_H

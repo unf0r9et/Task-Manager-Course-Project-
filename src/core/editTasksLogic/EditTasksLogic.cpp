@@ -6,12 +6,20 @@
 
 #include "AddTaskDialog.h"
 #include "../windows/EditTasks.h"
+#include "databaseManager/DatabaseManager.h"
+#include "TaskCardWidget.h"
+#include "interfaces/WindowOptions.h"
+#include "AddTaskDialog.h"
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <QMessageBox>
+
 
 void EditTasks::setDatabaseManager(DatabaseManager *dbManager) {
     this->dbManager = dbManager;
 }
 
-void EditTasks::onAddTaskButtonClicked() {
+void EditTasks::onAddTaskClicked() {
     if (!dbManager) {
         QMessageBox::critical(this, "Error", "Database is not initialized.");
         return;
@@ -20,8 +28,63 @@ void EditTasks::onAddTaskButtonClicked() {
     if (dialog.exec() == QDialog::Accepted) {
         showAllTasks();
     }
+
 }
 
 void EditTasks::showAllTasks() {
+    clearTaskCards();
 
+    if (!dbManager) return;
+
+    QSqlQuery query = dbManager->getAllTasks();
+
+    while (query.next()) {
+        int id = query.value("id").toInt();
+        QString title = query.value("title").toString();
+        QString description = query.value("description").toString();
+        QString category = query.value("category").toString();
+        QDate deadline = query.value("deadline").toDate();
+        bool completed = query.value("completed").toBool();
+
+        addTaskCard(id, title, description, category, deadline, completed);
+    }
+}
+
+void EditTasks::clearTaskCards() {
+    if (!tasksLayout) {
+        return;
+    }
+
+    QLayoutItem *child;
+    while ((child = tasksLayout->takeAt(0)) != nullptr) {
+        if (child->widget()) {
+            child->widget()->deleteLater();
+        }
+    }
+}
+
+void EditTasks::addTaskCard(int taskId, const QString &title, const QString &description,
+                            const QString &category, const QDate &deadline, bool completed) {
+    auto *card = new TaskCardWidget(taskId, title, description, category, deadline, completed);
+    tasksLayout->insertWidget(tasksLayout->count() - 1, card);
+
+    connect(card, &TaskCardWidget::deleteRequested, this, &EditTasks::onDeleteTask);
+    connect(card, &TaskCardWidget::completedChanged, this, &EditTasks::onCompletedChanged);
+}
+
+void EditTasks::onDeleteTask(int taskId) {
+    if (dbManager && dbManager->deleteTask(taskId)) {
+        showAllTasks();
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to delete task.");
+    }
+}
+
+void EditTasks::onCompletedChanged(int taskId, bool completed) {
+    if (dbManager) {
+        // Здесь можно обновить задачу в БД
+        // dbManager->updateTask(..., completed)
+        // Пока просто покажем сообщение
+        QMessageBox::information(this, "Status", "Task status updated.");
+    }
 }

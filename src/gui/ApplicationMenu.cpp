@@ -16,11 +16,7 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
 
     editTasksButton = new QPushButton(this);
     editTasksButton->setObjectName("editTasksButton");
-    editTasksButton->setText("Редактирование задач");
-
-    progressButton = new QPushButton(this);
-    progressButton->setObjectName("progressButton");
-    progressButton->setText("Прогресс задач");
+    editTasksButton->setText("Задачи");
 
     chatBotButton = new QPushButton(this);
     chatBotButton->setObjectName("chatBotButton");
@@ -40,8 +36,6 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
     auto secondLineLayout = new QHBoxLayout();
     firstLineLayout->addStretch();
     firstLineLayout->addWidget(editTasksButton);
-    firstLineLayout->addStretch();
-    firstLineLayout->addWidget(progressButton);
     firstLineLayout->addStretch();
     firstLineLayout->addWidget(chatBotButton);
     firstLineLayout->addStretch();
@@ -64,7 +58,6 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
     setLayout(mainLayout);
 
     connect(editTasksButton, &QPushButton::clicked, this, &ApplicationMenu::editTasksClicked);
-    connect(progressButton, &QPushButton::clicked, this, &ApplicationMenu::progressClicked);
     connect(chatBotButton, &QPushButton::clicked, this, &ApplicationMenu::chatBotClicked);
     connect(statisticsButton, &QPushButton::clicked, this, &ApplicationMenu::statisticsClicked);
     connect(calendarButton, &QPushButton::clicked, this, &ApplicationMenu::calendarClicked);

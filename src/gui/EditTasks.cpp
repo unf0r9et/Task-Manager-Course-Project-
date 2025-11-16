@@ -13,19 +13,34 @@ EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setObjectName("EditTasks");
 
+    addTaskButton = new QPushButton("+", this);
+    addTaskButton->setFixedSize(100, 100);
+    auto menuLayout = new QVBoxLayout();
+    menuLayout->addWidget(addTaskButton);
 
-    addTaskButton = new QPushButton(this);
 
-    auto addTaskButtonLayout = new QHBoxLayout();
-    addTaskButtonLayout->addWidget(addTaskButton);
+    addingTasksWidget = new QWidget();
+    addingTasksWidget->setFixedWidth(WINDOW_WIDTH/2);
+    menuLayout->addWidget(addingTasksWidget);
+
+    scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true);
 
 
-    auto mainLayout = new QVBoxLayout();
-    mainLayout->addLayout(addTaskButtonLayout);
+    tasksContainer = new QWidget();
+    tasksLayout = new QVBoxLayout(tasksContainer);
+    scrollArea->setWidget(tasksContainer);
+    scrollArea->setFixedWidth(WINDOW_WIDTH/2);
+
+    auto horizontalLayout = new QHBoxLayout();
+    horizontalLayout->addLayout(menuLayout);
+    horizontalLayout->addWidget(scrollArea);
+    auto *mainLayout = new QVBoxLayout(this);
+    mainLayout->addLayout(horizontalLayout);
 
     setLayout(mainLayout);
-
     StyleLoader::loadStyleSheet(this, "");
-    connect(addTaskButton, &QPushButton::clicked, this, &EditTasks::onAddTaskButtonClicked);
+
+    connect(addTaskButton, &QPushButton::clicked, this, &EditTasks::onAddTaskClicked);
 }
 

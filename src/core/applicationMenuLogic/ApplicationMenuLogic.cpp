@@ -8,10 +8,6 @@ void ApplicationMenu::editTasksClicked() {
     emit editTasksRequested();
 }
 
-void ApplicationMenu::progressClicked() {
-    emit progressWidgetRequested();
-}
-
 void ApplicationMenu::chatBotClicked() {
     emit chatBotWidgetRequested();
 }

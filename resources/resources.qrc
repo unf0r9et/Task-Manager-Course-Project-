@@ -3,6 +3,7 @@
         <!--STYLES-->
         <file>styles/authorization.qss</file>
         <file>styles/titlebar.qss</file>
+        <file>styles/editTasks.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>

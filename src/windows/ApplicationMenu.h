@@ -16,21 +16,18 @@ public:
 
     signals:
     void editTasksRequested();
-    void progressWidgetRequested();
     void chatBotWidgetRequested();
     void statisticsWidgetRequested();
     void calendarWidgetRequested();
 
     private slots:
     void editTasksClicked();
-    void progressClicked();
     void chatBotClicked();
     void statisticsClicked();
     void calendarClicked();
 
     private:
     QPushButton *editTasksButton;
-    QPushButton *progressButton;
     QPushButton *chatBotButton;
     QPushButton *statisticsButton;
     QPushButton *calendarButton;

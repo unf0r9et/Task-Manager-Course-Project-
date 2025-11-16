@@ -41,5 +41,6 @@ void AppController::showApplicationMenu() {
 }
 
 void AppController::showEditTasks() {
+    editTasks->showAllTasks();
     stack->setCurrentWidget(editTasks);
 }

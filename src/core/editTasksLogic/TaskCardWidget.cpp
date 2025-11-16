@@ -29,8 +29,8 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
     deadlineLabel = new QLabel(deadline.toString("dd.MM.yyyy"), this);
     deadlineLabel->setObjectName("DeadlineLabel");
 
-    deleteButton = new QPushButton("❌", this);
-    deleteButton->setFixedSize(30, 30);
+    deleteButton = new QPushButton("⨉", this);
+    deleteButton->setFixedSize(50, 50);
     connect(deleteButton, &QPushButton::clicked, this, &TaskCardWidget::onDeleteClicked);
 
     auto *headerLayout = new QHBoxLayout();
@@ -49,30 +49,10 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
     mainLayout->addWidget(descriptionLabel);
     mainLayout->addLayout(infoLayout);
 
-    setStyleSheet(R"(
-        #TaskCard {
-            border: 1px solid gray;
-            border-radius: 8px;
-            padding: 8px;
-            margin: 4px;
-            background-color: #f9f9f9;
-        }
-        #TitleLabel {
-            font-weight: bold;
-            font-size: 14px;
-        }
-        #DescriptionLabel {
-            font-size: 12px;
-            color: gray;
-        }
-        #CategoryLabel {
-            font-style: italic;
-            color: #007acc;
-        }
-        #DeadlineLabel {
-            color: #e74c3c;
-        }
-    )");
+     setMinimumHeight(100);
+     setMaximumHeight(200);
+
+
 
     if (completed) {
         titleLabel->setStyleSheet("text-decoration: line-through;");
@@ -82,10 +62,9 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
 
 void TaskCardWidget::onCompletedChanged() {
     emit completedChanged(taskId, completedCheckBox->isChecked());
-    // Обновим стили в зависимости от статуса
     if (completedCheckBox->isChecked()) {
         titleLabel->setStyleSheet("text-decoration: line-through;");
-        descriptionLabel->setStyleSheet("color: gray;");
+        descriptionLabel->setStyleSheet("color: red;");
     } else {
         titleLabel->setStyleSheet("");
         descriptionLabel->setStyleSheet("");

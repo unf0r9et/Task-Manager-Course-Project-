@@ -28,3 +28,6 @@
         else
             output->setText(QString::fromStdString(response));
     });
+
+#include "styleloader/StyleLoader.h"
+    StyleLoader::loadStyleSheet(this, "");
