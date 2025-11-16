@@ -29,10 +29,12 @@ void EditTasks::onAddTaskClicked() {
         connect(addTaskWidget, &AddTaskWidgetMenu::taskWasAdded, this, [this]() {
             showAllTasks();
             addTaskWidget->hide();
+            addTaskWidget = nullptr;
         });
 
         connect(addTaskWidget, &AddTaskWidgetMenu::taskWasNotAdded, this, [this]() {
             addTaskWidget->hide();
+            addTaskWidget = nullptr;
         });
     }
     addTaskWidget->show();
