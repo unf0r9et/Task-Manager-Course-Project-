@@ -9,7 +9,7 @@
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
 #include "styleloader/StyleLoader.h"
-#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/core/editTasksLogic/AddTaskWidgetMenu.h"
+#include "../core/editTasksLogic/AddTaskWidgetMenu/AddTaskWidgetMenu.h"
 
 
 EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
@@ -18,6 +18,9 @@ EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
 
     addTaskButton = new QPushButton("+", this);
     addTaskButton->setGeometry(400, WINDOW_HEIGHT - 1100, 180, 120);;
+
+    backToMenuButton = new QPushButton("НАЗАД", this);
+    backToMenuButton->setGeometry(0, 0, 180, 120);;
 
 
     scrollArea = new QScrollArea(this);
@@ -31,4 +34,5 @@ EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
 
     StyleLoader::loadStyleSheet(this, "");
     connect(addTaskButton, &QPushButton::clicked, this, &EditTasks::onAddTaskClicked);
+    connect(backToMenuButton, &QPushButton::clicked, this, &EditTasks::onBackButtonClicked);
 }

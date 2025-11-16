@@ -6,12 +6,12 @@
 
 #include "../windows/EditTasks.h"
 #include "databaseManager/DatabaseManager.h"
-#include "TaskCardWidget.h"
+#include "TaskCardWidget/TaskCardWidget.h"
 #include "interfaces/WindowOptions.h"
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QMessageBox>
-#include "AddTaskWidgetMenu.h"
+#include "AddTaskWidgetMenu/AddTaskWidgetMenu.h"
 
 void EditTasks::setDatabaseManager(DatabaseManager *dbManager) {
     this->dbManager = dbManager;
@@ -58,6 +58,14 @@ void EditTasks::showAllTasks() {
 
         addTaskCard(id, title, description, category, deadline, completed);
     }
+}
+
+void EditTasks::onBackButtonClicked() {
+    if (addTaskWidget) {
+        addTaskWidget->hide();
+        addTaskWidget = nullptr;
+    }
+    emit backToMenuClicked();
 }
 
 void EditTasks::clearTaskCards() {

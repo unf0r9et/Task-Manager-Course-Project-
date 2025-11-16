@@ -46,7 +46,7 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, QWidget *parent
     setLayout(mainLayout);
     connect(buttonAccept, &QPushButton::clicked, this, &AddTaskWidgetMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &AddTaskWidgetMenu::onRejectClicked);
-    this->setStyleSheet("background-color: gray;");
+  //  this->setStyleSheet("background-color: gray;");
 }
 
 

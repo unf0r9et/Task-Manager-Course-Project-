@@ -19,14 +19,19 @@ public:
     void setDatabaseManager(DatabaseManager *dbManager);
     void showAllTasks();
 
+signals:
+    void backToMenuClicked();
+
 private slots:
     void onAddTaskClicked();
+    void onBackButtonClicked();
     void onDeleteTask(int taskId);
     void onCompletedChanged(int taskId, bool completed);
 
 private:
     DatabaseManager *dbManager = nullptr;
     QPushButton *addTaskButton = nullptr;
+    QPushButton *backToMenuButton = nullptr;
     QScrollArea *scrollArea = nullptr;
     QWidget *tasksContainer = nullptr;
     QVBoxLayout *tasksLayout = nullptr;

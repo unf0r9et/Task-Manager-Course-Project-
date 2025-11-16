@@ -25,6 +25,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(registration, &Registration::authorizationRequested, this, &AppController::showAuthorization);
     connect(authorization, &Authorization::loginSuccessful, this, &AppController::showApplicationMenu);
     connect(applicationMenu, &ApplicationMenu::editTasksRequested, this, &AppController::showEditTasks);
+    connect(editTasks, &EditTasks::backToMenuClicked, this, &AppController::showApplicationMenu);
 
 }
 
