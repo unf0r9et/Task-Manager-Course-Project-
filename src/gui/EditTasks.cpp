@@ -8,39 +8,27 @@
 #include <QPushButton>
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
+#include "styleloader/StyleLoader.h"
+#include "/home/unf0r9et/myProject/CourseProject/TaskManager/src/core/editTasksLogic/AddTaskWidgetMenu.h"
+
 
 EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setObjectName("EditTasks");
 
     addTaskButton = new QPushButton("+", this);
-    addTaskButton->setFixedSize(100, 100);
-    auto menuLayout = new QVBoxLayout();
-    menuLayout->addWidget(addTaskButton);
+    addTaskButton->setGeometry(400, WINDOW_HEIGHT - 1100, 180, 120);;
 
-
-    addingTasksWidget = new QWidget();
-    addingTasksWidget->setFixedWidth(WINDOW_WIDTH/2);
-    menuLayout->addWidget(addingTasksWidget);
 
     scrollArea = new QScrollArea(this);
     scrollArea->setWidgetResizable(true);
-
+    scrollArea->setGeometry(980, 15, 1000,WINDOW_HEIGHT - 30);
 
     tasksContainer = new QWidget();
     tasksLayout = new QVBoxLayout(tasksContainer);
     scrollArea->setWidget(tasksContainer);
-    scrollArea->setFixedWidth(WINDOW_WIDTH/2);
 
-    auto horizontalLayout = new QHBoxLayout();
-    horizontalLayout->addLayout(menuLayout);
-    horizontalLayout->addWidget(scrollArea);
-    auto *mainLayout = new QVBoxLayout(this);
-    mainLayout->addLayout(horizontalLayout);
 
-    setLayout(mainLayout);
     StyleLoader::loadStyleSheet(this, "");
-
     connect(addTaskButton, &QPushButton::clicked, this, &EditTasks::onAddTaskClicked);
 }
-

@@ -4,16 +4,14 @@
 
 #include <QMessageBox>
 
-#include "AddTaskDialog.h"
 #include "../windows/EditTasks.h"
 #include "databaseManager/DatabaseManager.h"
 #include "TaskCardWidget.h"
 #include "interfaces/WindowOptions.h"
-#include "AddTaskDialog.h"
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QMessageBox>
-
+#include "AddTaskWidgetMenu.h"
 
 void EditTasks::setDatabaseManager(DatabaseManager *dbManager) {
     this->dbManager = dbManager;
@@ -24,12 +22,22 @@ void EditTasks::onAddTaskClicked() {
         QMessageBox::critical(this, "Error", "Database is not initialized.");
         return;
     }
-    AddTaskDialog dialog(dbManager, this);
-    if (dialog.exec() == QDialog::Accepted) {
-        showAllTasks();
-    }
 
+    if (!addTaskWidget) {
+        addTaskWidget = new AddTaskWidgetMenu(dbManager, this);
+        addTaskWidget->setGeometry(215, WINDOW_HEIGHT-900 , 550, 800);
+        connect(addTaskWidget, &AddTaskWidgetMenu::taskWasAdded, this, [this]() {
+            showAllTasks();
+            addTaskWidget->hide();
+        });
+
+        connect(addTaskWidget, &AddTaskWidgetMenu::taskWasNotAdded, this, [this]() {
+            addTaskWidget->hide();
+        });
+    }
+    addTaskWidget->show();
 }
+
 
 void EditTasks::showAllTasks() {
     clearTaskCards();

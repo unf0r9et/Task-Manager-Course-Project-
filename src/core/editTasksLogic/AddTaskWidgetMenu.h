@@ -1,5 +1,5 @@
-#ifndef ADDTASKWIDGET_H
-#define ADDTASKWIDGET_H
+#ifndef ADDTASKWIDGETMENU_H
+#define ADDTASKWIDGETMENU_H
 
 #include <QWidget>
 #include <QLineEdit>
@@ -11,15 +11,19 @@
 
 class DatabaseManager;
 
-class AddTaskDialog : public QDialog {
+class AddTaskWidgetMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AddTaskDialog(DatabaseManager *dbManager, QWidget *parent = nullptr);
+    explicit AddTaskWidgetMenu(DatabaseManager *dbManager, QWidget *parent = nullptr);
+
+signals:
+    void taskWasAdded();
+    void taskWasNotAdded();
 
 private slots:
     void onAcceptClicked();
-
+    void onRejectClicked();
 private:
     DatabaseManager *dbManager = nullptr;
     QLineEdit *titleEdit = nullptr;
@@ -28,4 +32,4 @@ private:
     QDateEdit *deadlineEdit = nullptr;
 };
 
-#endif // ADDTASKWIDGET_H
+#endif // ADDTASKWIDGETMENU_H

@@ -9,7 +9,7 @@
 
 class DatabaseManager;
 class TaskCardWidget;
-class AddTaskDialog;
+class AddTaskWidgetMenu;
 
 class EditTasks : public QWidget {
     Q_OBJECT
@@ -30,7 +30,7 @@ private:
     QScrollArea *scrollArea = nullptr;
     QWidget *tasksContainer = nullptr;
     QVBoxLayout *tasksLayout = nullptr;
-    QWidget *addingTasksWidget = nullptr;
+    AddTaskWidgetMenu *addTaskWidget = nullptr;
 
     void clearTaskCards();
     void addTaskCard(int taskId, const QString &title, const QString &description,
