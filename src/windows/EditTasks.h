@@ -25,7 +25,7 @@ signals:
 private slots:
     void onAddTaskClicked();
     void onBackButtonClicked();
-    void onDeleteTask(int taskId);
+    void onEditingTask(int taskId);
     void onCompletedChanged(int taskId, bool completed);
 
 private:

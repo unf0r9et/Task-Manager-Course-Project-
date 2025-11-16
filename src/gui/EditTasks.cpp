@@ -9,7 +9,7 @@
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
 #include "styleloader/StyleLoader.h"
-#include "../core/editTasksLogic/AddTaskWidgetMenu/AddTaskWidgetMenu.h"
+#include "../core/editTasksLogic/addTaskWidgetMenu/AddTaskWidgetMenu.h"
 
 
 EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {

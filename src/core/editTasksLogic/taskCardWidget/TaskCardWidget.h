@@ -14,13 +14,15 @@ public:
                             const QString &category, const QDate &deadline, bool completed,
                             QWidget *parent = nullptr);
 
-    signals:
-        void deleteRequested(int taskId);
+signals:
+    void editingRequested(int taskId);
+
     void completedChanged(int taskId, bool completed);
 
 private slots:
     void onCompletedChanged();
-    void onDeleteClicked();
+
+    void onEditingClicked();
 
 private:
     int taskId;

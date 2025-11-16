@@ -31,7 +31,7 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
 
     deleteButton = new QPushButton("⨉", this);
     deleteButton->setFixedSize(50, 50);
-    connect(deleteButton, &QPushButton::clicked, this, &TaskCardWidget::onDeleteClicked);
+    connect(deleteButton, &QPushButton::clicked, this, &TaskCardWidget::onEditingClicked);
 
     auto *headerLayout = new QHBoxLayout();
     headerLayout->addWidget(completedCheckBox);
@@ -71,6 +71,6 @@ void TaskCardWidget::onCompletedChanged() {
     }
 }
 
-void TaskCardWidget::onDeleteClicked() {
-    emit deleteRequested(taskId);
+void TaskCardWidget::onEditingClicked() {
+    emit editingRequested(taskId);
 }
