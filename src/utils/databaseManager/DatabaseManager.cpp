@@ -23,28 +23,28 @@ bool DatabaseManager::initDatabase() {
 
     //---------------------ТАБЛИЦА-ДЛЯ-ПОЛЬЗОВАТЕЛЕЙ---------------------
     if (!query.exec("CREATE TABLE IF NOT EXISTS users ("
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "username TEXT UNIQUE NOT NULL,"
-                    "password_hash TEXT NOT NULL,"
-                    "created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
-                    ")")) {
+        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "username TEXT UNIQUE NOT NULL,"
+        "password_hash TEXT NOT NULL,"
+        "created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
+        ")")) {
         qDebug() << "Failed to create table:" << query.lastError().text();
         return false;
     }
 
     //---------------------ТАБЛИЦА-ДЛЯ-ЗАДАЧ---------------------
     if (!query.exec("CREATE TABLE IF NOT EXISTS tasks ("
-                "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                "title TEXT NOT NULL,"
-                "description TEXT,"
-                "category TEXT,"
-                "deadline DATE,"
-                "completed BOOLEAN DEFAULT 0,"
-                "created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
-                ")")) {
+        "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "title TEXT NOT NULL,"
+        "description TEXT,"
+        "category TEXT,"
+        "deadline DATE,"
+        "completed BOOLEAN DEFAULT 0,"
+        "created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
+        ")")) {
         qDebug() << "Failed to create tasks table:" << query.lastError().text();
         return false;
-                }
+    }
 
     return true;
 }
@@ -80,7 +80,8 @@ QString DatabaseManager::getPasswordHash(const QString &username) {
     return QString();
 }
 
-bool DatabaseManager::addTask(const QString &title, const QString &description, const QString &category, const QDate &deadline) {
+bool DatabaseManager::addTask(const QString &title, const QString &description, const QString &category,
+                              const QDate &deadline) {
     QSqlQuery query;
     query.prepare("INSERT INTO tasks (title, description, category, deadline) VALUES (?, ?, ?, ?)");
     query.addBindValue(title);
@@ -107,14 +108,14 @@ bool DatabaseManager::deleteTask(int taskId) {
     return true;
 }
 
-bool DatabaseManager::updateTask(int taskId, const QString &title, const QString &description, const QString &category, const QDate &deadline, bool completed) {
+bool DatabaseManager::updateTask(int taskId, const QString &title, const QString &description, const QString &category,
+                                 const QDate &deadline) {
     QSqlQuery query;
-    query.prepare("UPDATE tasks SET title = ?, description = ?, category = ?, deadline = ?, completed = ? WHERE id = ?");
+    query.prepare("UPDATE tasks SET title = ?, description = ?, category = ?, deadline = ?, WHERE id = ?");
     query.addBindValue(title);
     query.addBindValue(description);
     query.addBindValue(category);
     query.addBindValue(deadline);
-    query.addBindValue(completed ? 1 : 0);
     query.addBindValue(taskId);
 
     if (!query.exec()) {
@@ -123,6 +124,19 @@ bool DatabaseManager::updateTask(int taskId, const QString &title, const QString
     }
     return true;
 }
+
+bool DatabaseManager::updateTaskCompleteness(const int taskId, const bool completed) {
+    QSqlQuery query;
+    query.prepare("UPDATE tasks SET completed = ? WHERE id = ?");
+    query.addBindValue(completed);
+    query.addBindValue(taskId);
+    if (!query.exec()) {
+        qDebug() << "Failed to update task:" << query.lastError().text();
+        return false;
+    }
+    return true;
+}
+
 
 QSqlQuery DatabaseManager::getAllTasks() {
     QSqlQuery query("SELECT * FROM tasks ORDER BY created_at DESC");

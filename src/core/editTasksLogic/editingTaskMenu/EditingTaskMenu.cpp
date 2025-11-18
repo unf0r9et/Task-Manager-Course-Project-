@@ -10,8 +10,8 @@
 #include <QVBoxLayout>
 #include "databaseManager/DatabaseManager.h"
 
-EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent) : QWidget(parent),
-    dbManager(dbManager) {
+EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, int taskId) : QWidget(parent),
+    taskId(taskId), dbManager(dbManager) {
     setAttribute(Qt::WA_StyledBackground, true);
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Что будем делать?");
@@ -45,6 +45,7 @@ EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent) : 
     auto buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(buttonReject);
     buttonLayout->addWidget(buttonAccept);
+    buttonLayout->addWidget(buttonDelete);
     mainLayout->addLayout(buttonLayout);
 
     setLayout(mainLayout);
@@ -58,16 +59,14 @@ void EditingTaskMenu::onAcceptClicked() {
         QMessageBox::warning(this, "Error", "Title cannot be empty.");
         return;
     }
-
     QString description = descriptionEdit->toPlainText();
     QString category = categoryCombo->currentText();
     QDate deadline = deadlineEdit->date();
-
     if (dbManager) {
-        if (dbManager->addTask(title, description, category, deadline)) {
-            emit taskWasAdded();
+        if (dbManager->updateTask(taskId, title, description, category, deadline)) {
+            emit taskWasEdited();
         } else {
-            QMessageBox::critical(this, "Error", "Failed to add task.");
+            QMessageBox::critical(this, "Error", "Failed to edit task.");
         }
     } else {
         QMessageBox::critical(this, "Error", "Database is not initialized.");
@@ -75,4 +74,5 @@ void EditingTaskMenu::onAcceptClicked() {
 }
 
 void EditingTaskMenu::onRejectClicked() {
+    emit taskWasNotEdited();
 }

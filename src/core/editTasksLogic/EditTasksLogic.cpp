@@ -26,7 +26,7 @@ void EditTasks::onAddTaskClicked() {
 
     if (!addTaskWidget) {
         addTaskWidget = new AddTaskWidgetMenu(dbManager, this);
-        addTaskWidget->setGeometry(215, WINDOW_HEIGHT-900 , 550, 800);
+        addTaskWidget->setGeometry(215, WINDOW_HEIGHT - 900, 550, 800);
         connect(addTaskWidget, &AddTaskWidgetMenu::taskWasAdded, this, [this]() {
             showAllTasks();
             addTaskWidget->hide();
@@ -56,7 +56,6 @@ void EditTasks::showAllTasks() {
         QString category = query.value("category").toString();
         QDate deadline = query.value("deadline").toDate();
         bool completed = query.value("completed").toBool();
-
         addTaskCard(id, title, description, category, deadline, completed);
     }
 }
@@ -92,19 +91,40 @@ void EditTasks::addTaskCard(int taskId, const QString &title, const QString &des
 }
 
 void EditTasks::onEditingTask(int taskId) {
-
-    if (dbManager && dbManager->deleteTask(taskId)) {
-        showAllTasks();
-    } else {
-        QMessageBox::critical(this, "Error", "Failed to delete task.");
+    //________________________________________________________________________________________________!!!!
+    if (!dbManager) {
+        QMessageBox::critical(this, "Error", "Database is not initialized.");
+        return;
     }
+
+
+    if (!editingTaskWidget) {
+        editingTaskWidget = new EditingTaskMenu(dbManager, this, taskId);
+        editingTaskWidget->setGeometry(215, WINDOW_HEIGHT - 900, 550, 800);
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasEdited, this, [this]() {
+            showAllTasks();
+            editingTaskWidget->hide();
+            editingTaskWidget = nullptr;
+        });
+
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasNotEdited, this, [this]() {
+            editingTaskWidget->hide();
+            editingTaskWidget = nullptr;
+        });
+    }
+
+    editingTaskWidget->show();
+
+    //
+    // if (dbManager && dbManager->deleteTask(taskId)) {
+    //     showAllTasks();
+    // } else {
+    //     QMessageBox::critical(this, "Error", "Failed to delete task.");
+    // }
 }
 
 void EditTasks::onCompletedChanged(int taskId, bool completed) {
-    if (dbManager) {
-        // Здесь можно обновить задачу в БД
-        // dbManager->updateTask(..., completed)
-        // Пока просто покажем сообщение
+    if (dbManager && dbManager->updateTaskCompleteness(taskId, completed)) {
         QMessageBox::information(this, "Status", "Task status updated.");
     }
 }

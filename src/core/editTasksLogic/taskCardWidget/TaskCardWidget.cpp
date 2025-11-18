@@ -49,10 +49,8 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
     mainLayout->addWidget(descriptionLabel);
     mainLayout->addLayout(infoLayout);
 
-     setMinimumHeight(100);
-     setMaximumHeight(200);
-
-
+    setMinimumHeight(100);
+    setMaximumHeight(200);
 
     if (completed) {
         titleLabel->setStyleSheet("text-decoration: line-through;");

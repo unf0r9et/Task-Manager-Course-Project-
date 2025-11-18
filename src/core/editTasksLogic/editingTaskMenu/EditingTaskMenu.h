@@ -10,25 +10,30 @@
 #include "../addTaskWidgetMenu/AddTaskWidgetMenu.h"
 
 
-class EditingTaskMenu : public QWidget{
+class EditingTaskMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent = nullptr);
-    signals:
-        void taskWasAdded();
-    void taskWasNotAdded();
+    explicit EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent = nullptr, int taskId = -1);
+
+signals:
+    void taskWasEdited();
+    void taskWasNotEdited();
+    void taskWasDeleted();
 
 private slots:
     void onAcceptClicked();
+
     void onRejectClicked();
 
 private:
+    int taskId;
     DatabaseManager *dbManager = nullptr;
     QLineEdit *titleEdit = nullptr;
     QTextEdit *descriptionEdit = nullptr;
     QComboBox *categoryCombo = nullptr;
     QDateEdit *deadlineEdit = nullptr;
+
 };
 
 
