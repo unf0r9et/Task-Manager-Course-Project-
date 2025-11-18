@@ -92,6 +92,7 @@ void EditTasks::addTaskCard(int taskId, const QString &title, const QString &des
 }
 
 void EditTasks::onEditingTask(int taskId) {
+
     if (dbManager && dbManager->deleteTask(taskId)) {
         showAllTasks();
     } else {
