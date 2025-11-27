@@ -6,6 +6,7 @@
 #include "../../src/gui/abstractMainWindow/AbstractMainWindow.h"
 #include "../../src/windows/ApplicationMenu.h"
 #include "../windows/EditTasks.h"
+#include "../windows/ChatBotWindow.h"
 #include "../../src/core/appController/AppController.h"
 #include "../../src/gui/titlebar/TitleBar.h"
 

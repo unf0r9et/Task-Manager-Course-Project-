@@ -20,6 +20,8 @@ public slots:
 
     void showEditTasks();
 
+    void showChatBotWindow();
+
 private:
     QStackedWidget *stack;
     Authorization *authorization;
@@ -27,6 +29,7 @@ private:
     ApplicationMenu *applicationMenu;
     EditTasks *editTasks;
     DatabaseManager dbManager;
+    ChatBotWindow *chatBotWindow;
 };
 
 

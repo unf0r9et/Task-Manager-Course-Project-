@@ -3,15 +3,16 @@
 
 #include <QLineEdit>
 #include <QWidget>
+#include "databaseManager/dataBaseUser/DataBaseUser.h"
 
 class DatabaseManager;
 
-class Registration : public QWidget {
+class Registration : public QWidget, public DataBaseUser {
     Q_OBJECT
 
 public:
     explicit Registration(QWidget *parent = nullptr);
-    void setDatabaseManager(DatabaseManager *dbManager);
+
 signals:
     void authorizationRequested();
 
@@ -19,7 +20,6 @@ private:
     QLineEdit *loginEdit = nullptr;
     QLineEdit *passwordEdit = nullptr;
     QPushButton *registrationButton = nullptr;
-    DatabaseManager *dbManager = nullptr;
     void backToAuthorization();
     void registeringNewAccount();
 };

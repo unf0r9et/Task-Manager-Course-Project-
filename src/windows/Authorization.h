@@ -2,18 +2,18 @@
 #define AUTHORIZATION_H
 
 #include <QWidget>
+#include "databaseManager/dataBaseUser/DataBaseUser.h"
 
 class Registration;
 class QLineEdit;
 class QPushButton;
 class DatabaseManager;
 
-class Authorization : public QWidget {
+class Authorization : public QWidget, public DataBaseUser {
     Q_OBJECT
 
 public:
     explicit Authorization(QWidget *parent = nullptr);
-    void setDatabaseManager(DatabaseManager *dbManager);
     QString userLogin;
 signals:
     void registerRequested();
@@ -28,7 +28,6 @@ private:
     QLineEdit *loginEdit;
     QLineEdit *passwordEdit;
     QPushButton *loginButton;
-    DatabaseManager *dbManager = nullptr;
     bool checkingLoginAndPassword();
 };
 

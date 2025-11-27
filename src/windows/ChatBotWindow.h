@@ -1,0 +1,37 @@
+//
+// Created by unf0r9et on 27.11.25.
+//
+
+#ifndef CHATBOTWINDOW_H
+#define CHATBOTWINDOW_H
+
+#include <QWidget>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QScrollArea>
+#include <QSqlQuery>
+#include "databaseManager/dataBaseUser/DataBaseUser.h"
+
+class DatabaseManager;
+class TaskCardWidget;
+class AddTaskWidgetMenu;
+class EditingTaskMenu;
+
+
+class ChatBotWindow : public QWidget, public DataBaseUser {
+    Q_OBJECT
+
+public:
+    explicit ChatBotWindow(QWidget *parent = nullptr);
+
+    int currentUserId = -1;
+
+private:
+
+
+};
+
+
+
+
+#endif //CHATBOTWINDOW_H

@@ -9,10 +9,6 @@
 #include "../../windows/Authorization.h"
 #include "databaseManager/DatabaseManager.h"
 
-void Authorization::setDatabaseManager(DatabaseManager *dbManager) {
-    this->dbManager = dbManager;
-}
-
 void Authorization::onLoginClicked() {
     if (checkingLoginAndPassword())
         emit loginSuccessful();

@@ -6,19 +6,18 @@
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QSqlQuery>
+#include "databaseManager/dataBaseUser/DataBaseUser.h"
 
 class DatabaseManager;
 class TaskCardWidget;
 class AddTaskWidgetMenu;
 class EditingTaskMenu;
 
-class EditTasks : public QWidget {
+class EditTasks : public QWidget, public DataBaseUser {
     Q_OBJECT
 
 public:
     explicit EditTasks(QWidget *parent = nullptr);
-
-    void setDatabaseManager(DatabaseManager *dbManager);
 
     void showAllTasks();
 
@@ -39,7 +38,6 @@ private slots:
     void changingTask();
 
 private:
-    DatabaseManager *dbManager = nullptr;
     QPushButton *addTaskButton = nullptr;
     QPushButton *backToMenuButton = nullptr;
     QScrollArea *scrollArea = nullptr;
@@ -52,7 +50,6 @@ private:
 
     void addTaskCard(int taskId, const QString &title, const QString &description,
                      const QString &category, const QDate &deadline, bool completed);
-
 };
 
 #endif // EDITTASKS_H

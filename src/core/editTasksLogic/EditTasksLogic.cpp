@@ -14,10 +14,6 @@
 #include "../../windows/widgets/AddTaskWidgetMenu.h"
 #include "../../windows/widgets/EditingTaskMenu.h"
 
-void EditTasks::setDatabaseManager(DatabaseManager *dbManager) {
-    this->dbManager = dbManager;
-}
-
 void EditTasks::onAddTaskClicked() {
     if (!dbManager) {
         QMessageBox::critical(this, "Error", "Database is not initialized.");

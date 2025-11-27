@@ -12,10 +12,6 @@ void Registration::backToAuthorization() {
     emit authorizationRequested();
 }
 
-void Registration::setDatabaseManager(DatabaseManager *dbManager) {
-    this->dbManager = dbManager;
-}
-
 void Registration::registeringNewAccount() {
     if (!dbManager) {
         QMessageBox::critical(this, "Error", "Database manager is not set!");
