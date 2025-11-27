@@ -6,7 +6,7 @@
 #include <QPushButton>
 
 #include "databaseManager/DatabaseManager.h"
-#include "../../windows/Registration.h"
+#include "../windows/Registration.h"
 
 void Registration::backToAuthorization() {
     emit authorizationRequested();

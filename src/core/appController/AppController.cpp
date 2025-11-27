@@ -31,6 +31,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(applicationMenu, &ApplicationMenu::editTasksRequested, this, &AppController::showEditTasks);
     connect(applicationMenu, &ApplicationMenu::chatBotWidgetRequested, this, &AppController::showChatBotWindow);
     connect(editTasks, &EditTasks::backToMenuClicked, this, &AppController::showApplicationMenu);
+    connect(chatBotWindow, &ChatBotWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
 }
 
 void AppController::showAuthorization() {

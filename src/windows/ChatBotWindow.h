@@ -5,6 +5,8 @@
 #ifndef CHATBOTWINDOW_H
 #define CHATBOTWINDOW_H
 
+#include <QLabel>
+#include <QLineEdit>
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -26,12 +28,24 @@ public:
 
     int currentUserId = -1;
 
+signals:
+    void backToMenuClicked();
+
 private:
+    void sendRequest();
 
+    void onAddTaskPressed();
 
+    void onNotAddTaskPressed();
+
+    void onBackButtonClicked();
+
+    void resetWidget();
+
+    QString lastResponse;
+    QLineEdit *input;
+    QLabel *output;
 };
-
-
 
 
 #endif //CHATBOTWINDOW_H
