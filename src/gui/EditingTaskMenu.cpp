@@ -1,15 +1,17 @@
-#include "AddTaskWidgetMenu.h"
+//
+// Created by unf0r9et on 16.11.25.
+//
+
+#include "EditingTaskMenu.h"
 
 #include <QLabel>
-#include <QMessageBox>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include "databaseManager/DatabaseManager.h"
 
-AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUserId, QWidget *parent)
-    : QWidget(parent), dbManager(dbManager), currentUserId(currentUserId) {
+
+EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, int taskId) : QWidget(parent),
+    taskId(taskId), dbManager(dbManager) {
     setAttribute(Qt::WA_StyledBackground, true);
-
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Что будем делать?");
 
@@ -27,6 +29,8 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUser
     buttonAccept->setText("OK");
     auto buttonReject = new QPushButton(this);
     buttonReject->setText("NO");
+    auto buttonDelete = new QPushButton(this);
+    buttonDelete->setText("Удалить");
 
     auto *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(new QLabel("Название"));
@@ -40,37 +44,12 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUser
     auto buttonLayout = new QHBoxLayout();
     buttonLayout->addWidget(buttonReject);
     buttonLayout->addWidget(buttonAccept);
+    buttonLayout->addWidget(buttonDelete);
     mainLayout->addLayout(buttonLayout);
 
     setLayout(mainLayout);
-    connect(buttonAccept, &QPushButton::clicked, this, &AddTaskWidgetMenu::onAcceptClicked);
-    connect(buttonReject, &QPushButton::clicked, this, &AddTaskWidgetMenu::onRejectClicked);
-    //  this->setStyleSheet("background-color: gray;");
+    connect(buttonAccept, &QPushButton::clicked, this, &EditingTaskMenu::onAcceptClicked);
+    connect(buttonReject, &QPushButton::clicked, this, &EditingTaskMenu::onRejectClicked);
+    connect(buttonDelete, &QPushButton::clicked, this, &EditingTaskMenu::onDeleteClicked);
 }
 
-
-void AddTaskWidgetMenu::onAcceptClicked() {
-    QString title = titleEdit->text().trimmed();
-    if (title.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Title cannot be empty.");
-        return;
-    }
-
-    QString description = descriptionEdit->toPlainText();
-    QString category = categoryCombo->currentText();
-    QDate deadline = deadlineEdit->date();
-
-    if (dbManager) {
-        if (dbManager->addTask(currentUserId, title, description, category, deadline)) {
-            emit taskWasAdded();
-        } else {
-            QMessageBox::critical(this, "Error", "Failed to add task.");
-        }
-    } else {
-        QMessageBox::critical(this, "Error", "Database is not initialized.");
-    }
-}
-
-void AddTaskWidgetMenu::onRejectClicked() {
-    emit taskWasNotAdded();
-}

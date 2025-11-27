@@ -7,7 +7,7 @@
 
 #include <QWidget>
 
-#include "../addTaskWidgetMenu/AddTaskWidgetMenu.h"
+#include "AddTaskWidgetMenu.h"
 
 
 class EditingTaskMenu : public QWidget {

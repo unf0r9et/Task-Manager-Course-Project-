@@ -6,13 +6,13 @@
 
 #include "../windows/EditTasks.h"
 #include "databaseManager/DatabaseManager.h"
-#include "taskCardWidget/TaskCardWidget.h"
+#include "TaskCardWidget.h"
 #include "interfaces/WindowOptions.h"
 #include <QVBoxLayout>
 #include <QScrollArea>
 #include <QMessageBox>
-#include "addTaskWidgetMenu/AddTaskWidgetMenu.h"
-#include "editingTaskMenu/EditingTaskMenu.h"
+#include "../../windows/widgets/AddTaskWidgetMenu.h"
+#include "../../windows/widgets/EditingTaskMenu.h"
 
 void EditTasks::setDatabaseManager(DatabaseManager *dbManager) {
     this->dbManager = dbManager;
@@ -66,6 +66,7 @@ void EditTasks::onBackButtonClicked() {
         addTaskWidget = nullptr;
     }
     if (editingTaskWidget) {
+        addTaskButton->show();
         editingTaskWidget->hide();
         editingTaskWidget = nullptr;
     }
@@ -99,27 +100,16 @@ void EditTasks::onEditingTask(int taskId) {
         QMessageBox::critical(this, "Error", "Database is not initialized.");
         return;
     }
-
-
+    addTaskButton->hide();
     if (!editingTaskWidget) {
         editingTaskWidget = new EditingTaskMenu(dbManager, this, taskId);
         editingTaskWidget->setGeometry(215, WINDOW_HEIGHT - 900, 550, 800);
-        connect(editingTaskWidget, &EditingTaskMenu::taskWasEdited, this, [this]() {
-            showAllTasks();
-            editingTaskWidget->hide();
-            editingTaskWidget = nullptr;
-        });
 
-        connect(editingTaskWidget, &EditingTaskMenu::taskWasNotEdited, this, [this]() {
-            editingTaskWidget->hide();
-            editingTaskWidget = nullptr;
-        });
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasEdited, this, &EditTasks::changingTask);
 
-        connect(editingTaskWidget, &EditingTaskMenu::taskWasDeleted, this, [this]() {
-            editingTaskWidget->hide();
-            editingTaskWidget = nullptr;
-            showAllTasks();
-        });
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasNotEdited, this, &EditTasks::changingTask);
+
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasDeleted, this, &EditTasks::changingTask);
     }
 
     editingTaskWidget->show();
@@ -129,4 +119,11 @@ void EditTasks::onCompletedChanged(int taskId, bool completed) {
     if (dbManager && dbManager->updateTaskCompleteness(taskId, completed)) {
         QMessageBox::information(this, "Status", "Task status updated.");
     }
+}
+
+void EditTasks::changingTask() {
+    addTaskButton->show();
+    editingTaskWidget->hide();
+    editingTaskWidget = nullptr;
+    showAllTasks();
 }

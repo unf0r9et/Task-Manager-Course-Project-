@@ -1,4 +1,4 @@
-#include "TaskCardWidget.h"
+#include "../windows/widgets/TaskCardWidget.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>

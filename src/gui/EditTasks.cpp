@@ -8,7 +8,7 @@
 #include <QPushButton>
 #include "interfaces/WindowOptions.h"
 #include "styleloader/StyleLoader.h"
-#include "../core/editTasksLogic/addTaskWidgetMenu/AddTaskWidgetMenu.h"
+#include "../windows/widgets/AddTaskWidgetMenu.h"
 
 
 EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
@@ -29,9 +29,7 @@ EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
     tasksContainer = new QWidget();
     tasksLayout = new QVBoxLayout(tasksContainer);
     scrollArea->setWidget(tasksContainer);
-
-
-    StyleLoader::loadStyleSheet(this, "");
     connect(addTaskButton, &QPushButton::clicked, this, &EditTasks::onAddTaskClicked);
     connect(backToMenuButton, &QPushButton::clicked, this, &EditTasks::onBackButtonClicked);
+   // StyleLoader::loadStyleSheet(this, "");
 }

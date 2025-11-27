@@ -18,7 +18,7 @@ include_directories(
         ${CMAKE_SOURCE_DIR}/src/utils
         ${CMAKE_SOURCE_DIR}/src/gui
         ${CMAKE_SOURCE_DIR}/src/core
-
+        ${CMAKE_SOURCE_DIR}/src/windows/widgets
 )
 
 set(RESOURCES

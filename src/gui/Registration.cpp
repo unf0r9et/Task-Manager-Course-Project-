@@ -46,5 +46,5 @@ Registration::Registration(QWidget *parent) : QWidget(parent) {
 
     //connect(button, &QPushButton::clicked, this, &Registration::backToAuthorization);
     connect(registrationButton, &QPushButton::clicked, this, &Registration::registeringNewAccount);
-    StyleLoader::loadStyleSheet(this, "");
+ //   StyleLoader::loadStyleSheet(this, "");
 }

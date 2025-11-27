@@ -36,6 +36,8 @@ private slots:
 
     void onCompletedChanged(int taskId, bool completed);
 
+    void changingTask();
+
 private:
     DatabaseManager *dbManager = nullptr;
     QPushButton *addTaskButton = nullptr;
@@ -50,6 +52,7 @@ private:
 
     void addTaskCard(int taskId, const QString &title, const QString &description,
                      const QString &category, const QDate &deadline, bool completed);
+
 };
 
 #endif // EDITTASKS_H
