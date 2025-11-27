@@ -7,6 +7,7 @@
 #include "../../src/windows/ApplicationMenu.h"
 #include "../windows/EditTasks.h"
 #include "../windows/ChatBotWindow.h"
+#include "../windows/StatisticsWindow.h"
 #include "../../src/core/appController/AppController.h"
 #include "../../src/gui/titlebar/TitleBar.h"
 

@@ -9,11 +9,11 @@ void ApplicationMenu::editTasksClicked() {
 }
 
 void ApplicationMenu::chatBotClicked() {
-    emit chatBotWidgetRequested();
+    emit chatBotWindowRequested();
 }
 
 void ApplicationMenu::statisticsClicked() {
-    emit statisticsWidgetRequested();
+    emit statisticsWindowRequested();
 }
 
 void ApplicationMenu::calendarClicked() {

@@ -16,8 +16,8 @@ public:
 
     signals:
     void editTasksRequested();
-    void chatBotWidgetRequested();
-    void statisticsWidgetRequested();
+    void chatBotWindowRequested();
+    void statisticsWindowRequested();
     void calendarWidgetRequested();
 
     private slots:
