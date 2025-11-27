@@ -26,6 +26,8 @@ private slots:
 
     void onRejectClicked();
 
+    void onDeleteClicked();
+
 private:
     int taskId;
     DatabaseManager *dbManager = nullptr;

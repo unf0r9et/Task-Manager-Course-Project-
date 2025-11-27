@@ -65,6 +65,10 @@ void EditTasks::onBackButtonClicked() {
         addTaskWidget->hide();
         addTaskWidget = nullptr;
     }
+    if (editingTaskWidget) {
+        editingTaskWidget->hide();
+        editingTaskWidget = nullptr;
+    }
     emit backToMenuClicked();
 }
 
@@ -91,7 +95,6 @@ void EditTasks::addTaskCard(int taskId, const QString &title, const QString &des
 }
 
 void EditTasks::onEditingTask(int taskId) {
-    //________________________________________________________________________________________________!!!!
     if (!dbManager) {
         QMessageBox::critical(this, "Error", "Database is not initialized.");
         return;
@@ -111,16 +114,15 @@ void EditTasks::onEditingTask(int taskId) {
             editingTaskWidget->hide();
             editingTaskWidget = nullptr;
         });
+
+        connect(editingTaskWidget, &EditingTaskMenu::taskWasDeleted, this, [this]() {
+            editingTaskWidget->hide();
+            editingTaskWidget = nullptr;
+            showAllTasks();
+        });
     }
 
     editingTaskWidget->show();
-
-    //
-    // if (dbManager && dbManager->deleteTask(taskId)) {
-    //     showAllTasks();
-    // } else {
-    //     QMessageBox::critical(this, "Error", "Failed to delete task.");
-    // }
 }
 
 void EditTasks::onCompletedChanged(int taskId, bool completed) {

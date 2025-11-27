@@ -111,7 +111,7 @@ bool DatabaseManager::deleteTask(int taskId) {
 bool DatabaseManager::updateTask(int taskId, const QString &title, const QString &description, const QString &category,
                                  const QDate &deadline) {
     QSqlQuery query;
-    query.prepare("UPDATE tasks SET title = ?, description = ?, category = ?, deadline = ?, WHERE id = ?");
+    query.prepare("UPDATE tasks SET title = ?, description = ?, category = ?, deadline = ? WHERE id = ?");
     query.addBindValue(title);
     query.addBindValue(description);
     query.addBindValue(category);

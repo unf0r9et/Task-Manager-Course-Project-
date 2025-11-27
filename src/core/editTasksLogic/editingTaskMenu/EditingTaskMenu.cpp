@@ -51,6 +51,7 @@ EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, in
     setLayout(mainLayout);
     connect(buttonAccept, &QPushButton::clicked, this, &EditingTaskMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &EditingTaskMenu::onRejectClicked);
+    connect(buttonDelete, &QPushButton::clicked, this, &EditingTaskMenu::onDeleteClicked);
 }
 
 void EditingTaskMenu::onAcceptClicked() {
@@ -75,4 +76,12 @@ void EditingTaskMenu::onAcceptClicked() {
 
 void EditingTaskMenu::onRejectClicked() {
     emit taskWasNotEdited();
+}
+
+void EditingTaskMenu::onDeleteClicked() {
+    if (dbManager && dbManager->deleteTask(taskId)) {
+        emit taskWasDeleted();
+    } else {
+        QMessageBox::critical(this, "Error", "Failed to delete task.");
+    }
 }

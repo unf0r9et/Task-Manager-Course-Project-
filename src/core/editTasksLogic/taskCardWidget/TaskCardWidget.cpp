@@ -29,7 +29,7 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
     deadlineLabel = new QLabel(deadline.toString("dd.MM.yyyy"), this);
     deadlineLabel->setObjectName("DeadlineLabel");
 
-    deleteButton = new QPushButton("⨉", this);
+    deleteButton = new QPushButton("Р", this);
     deleteButton->setFixedSize(50, 50);
     connect(deleteButton, &QPushButton::clicked, this, &TaskCardWidget::onEditingClicked);
 
