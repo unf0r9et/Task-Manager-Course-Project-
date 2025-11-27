@@ -28,6 +28,13 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
 
     deadlineLabel = new QLabel(deadline.toString("dd.MM.yyyy"), this);
     deadlineLabel->setObjectName("DeadlineLabel");
+    QDate today = QDate::currentDate();
+    if (deadline < today) {
+        deadlineLabel->setStyleSheet("color: red; font-weight: bold;");
+    } else {
+        deadlineLabel->setStyleSheet("");
+    }
+
 
     deleteButton = new QPushButton("Р", this);
     deleteButton->setFixedSize(50, 50);
