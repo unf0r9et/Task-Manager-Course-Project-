@@ -35,12 +35,14 @@ bool DatabaseManager::initDatabase() {
     //---------------------ТАБЛИЦА-ДЛЯ-ЗАДАЧ---------------------
     if (!query.exec("CREATE TABLE IF NOT EXISTS tasks ("
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+        "user_id INTEGER NOT NULL,"
         "title TEXT NOT NULL,"
         "description TEXT,"
         "category TEXT,"
         "deadline DATE,"
         "completed BOOLEAN DEFAULT 0,"
-        "created_at DATETIME DEFAULT CURRENT_TIMESTAMP"
+        "created_at DATETIME DEFAULT CURRENT_TIMESTAMP,"
+        "FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE"
         ")")) {
         qDebug() << "Failed to create tasks table:" << query.lastError().text();
         return false;
@@ -80,10 +82,11 @@ QString DatabaseManager::getPasswordHash(const QString &username) {
     return QString();
 }
 
-bool DatabaseManager::addTask(const QString &title, const QString &description, const QString &category,
-                              const QDate &deadline) {
+bool DatabaseManager::addTask(int userId, const QString &title, const QString &description,
+                              const QString &category, const QDate &deadline) {
     QSqlQuery query;
-    query.prepare("INSERT INTO tasks (title, description, category, deadline) VALUES (?, ?, ?, ?)");
+    query.prepare("INSERT INTO tasks (user_id, title, description, category, deadline) VALUES (?, ?, ?, ?, ?)");
+    query.addBindValue(userId);
     query.addBindValue(title);
     query.addBindValue(description);
     query.addBindValue(category);
@@ -138,7 +141,20 @@ bool DatabaseManager::updateTaskCompleteness(const int taskId, const bool comple
 }
 
 
-QSqlQuery DatabaseManager::getAllTasks() {
-    QSqlQuery query("SELECT * FROM tasks ORDER BY created_at DESC");
+QSqlQuery DatabaseManager::getTasksByUser(int userId) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC");
+    query.addBindValue(userId);
+    query.exec();
     return query;
+}
+
+int DatabaseManager::getUserId(const QString &username) {
+    QSqlQuery query;
+    query.prepare("SELECT id FROM users WHERE username = ?");
+    query.addBindValue(username);
+    if (query.exec() && query.next()) {
+        return query.value(0).toInt();
+    }
+    return -1;
 }

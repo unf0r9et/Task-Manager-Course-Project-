@@ -28,7 +28,7 @@ void Authorization::onRegisterClicked() {
 bool Authorization::checkingLoginAndPassword() {
     QString username = loginEdit->text().trimmed();
     QString password = passwordEdit->text();
-
+    userLogin = username;
     if (username.isEmpty() || password.isEmpty()) {
         return false;
     }

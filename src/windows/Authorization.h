@@ -14,7 +14,7 @@ class Authorization : public QWidget {
 public:
     explicit Authorization(QWidget *parent = nullptr);
     void setDatabaseManager(DatabaseManager *dbManager);
-
+    QString userLogin;
 signals:
     void registerRequested();
     void loginSuccessful();

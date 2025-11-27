@@ -17,16 +17,23 @@ class EditTasks : public QWidget {
 
 public:
     explicit EditTasks(QWidget *parent = nullptr);
+
     void setDatabaseManager(DatabaseManager *dbManager);
+
     void showAllTasks();
+
+    int currentUserId = -1;
 
 signals:
     void backToMenuClicked();
 
 private slots:
     void onAddTaskClicked();
+
     void onBackButtonClicked();
+
     void onEditingTask(int taskId);
+
     void onCompletedChanged(int taskId, bool completed);
 
 private:
@@ -40,6 +47,7 @@ private:
     EditingTaskMenu *editingTaskWidget = nullptr;
 
     void clearTaskCards();
+
     void addTaskCard(int taskId, const QString &title, const QString &description,
                      const QString &category, const QDate &deadline, bool completed);
 };

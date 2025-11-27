@@ -15,7 +15,7 @@ class AddTaskWidgetMenu : public QWidget {
     Q_OBJECT
 
 public:
-    explicit AddTaskWidgetMenu(DatabaseManager *dbManager, QWidget *parent = nullptr);
+    explicit AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUserId, QWidget *parent = nullptr);
 
 signals:
     void taskWasAdded();
@@ -26,6 +26,7 @@ private slots:
     void onRejectClicked();
 private:
     DatabaseManager *dbManager = nullptr;
+    int currentUserId = -1;
     QLineEdit *titleEdit = nullptr;
     QTextEdit *descriptionEdit = nullptr;
     QComboBox *categoryCombo = nullptr;

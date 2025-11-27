@@ -6,9 +6,8 @@
 #include <QVBoxLayout>
 #include "databaseManager/DatabaseManager.h"
 
-AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, QWidget *parent)
-    : QWidget(parent), dbManager(dbManager) {
-
+AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUserId, QWidget *parent)
+    : QWidget(parent), dbManager(dbManager), currentUserId(currentUserId) {
     setAttribute(Qt::WA_StyledBackground, true);
 
     titleEdit = new QLineEdit(this);
@@ -46,7 +45,7 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, QWidget *parent
     setLayout(mainLayout);
     connect(buttonAccept, &QPushButton::clicked, this, &AddTaskWidgetMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &AddTaskWidgetMenu::onRejectClicked);
-  //  this->setStyleSheet("background-color: gray;");
+    //  this->setStyleSheet("background-color: gray;");
 }
 
 
@@ -62,7 +61,7 @@ void AddTaskWidgetMenu::onAcceptClicked() {
     QDate deadline = deadlineEdit->date();
 
     if (dbManager) {
-        if (dbManager->addTask(title, description, category, deadline)) {
+        if (dbManager->addTask(currentUserId, title, description, category, deadline)) {
             emit taskWasAdded();
         } else {
             QMessageBox::critical(this, "Error", "Failed to add task.");

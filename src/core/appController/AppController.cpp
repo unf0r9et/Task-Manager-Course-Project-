@@ -26,7 +26,6 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(authorization, &Authorization::loginSuccessful, this, &AppController::showApplicationMenu);
     connect(applicationMenu, &ApplicationMenu::editTasksRequested, this, &AppController::showEditTasks);
     connect(editTasks, &EditTasks::backToMenuClicked, this, &AppController::showApplicationMenu);
-
 }
 
 void AppController::showAuthorization() {
@@ -38,10 +37,12 @@ void AppController::showRegistration() {
 }
 
 void AppController::showApplicationMenu() {
+    currentUserId = dbManager.getUserId(authorization->userLogin);
     stack->setCurrentWidget(applicationMenu);
 }
 
 void AppController::showEditTasks() {
+    if (editTasks->currentUserId == -1) editTasks->currentUserId = currentUserId;
     editTasks->showAllTasks();
     stack->setCurrentWidget(editTasks);
 }

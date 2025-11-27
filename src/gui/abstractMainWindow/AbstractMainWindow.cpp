@@ -29,7 +29,7 @@ AbstractMainWindow::AbstractMainWindow(QWidget *parent)
 
     controller = new AppController(stack, this);
 
-    controller->showEditTasks();
+    controller->showAuthorization();
 }
 
 void AbstractMainWindow::mousePressEvent(QMouseEvent *event) {

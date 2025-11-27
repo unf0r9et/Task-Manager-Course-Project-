@@ -25,7 +25,7 @@ void EditTasks::onAddTaskClicked() {
     }
 
     if (!addTaskWidget) {
-        addTaskWidget = new AddTaskWidgetMenu(dbManager, this);
+        addTaskWidget = new AddTaskWidgetMenu(dbManager, currentUserId, this);
         addTaskWidget->setGeometry(215, WINDOW_HEIGHT - 900, 550, 800);
         connect(addTaskWidget, &AddTaskWidgetMenu::taskWasAdded, this, [this]() {
             showAllTasks();
@@ -47,7 +47,7 @@ void EditTasks::showAllTasks() {
 
     if (!dbManager) return;
 
-    QSqlQuery query = dbManager->getAllTasks();
+    QSqlQuery query = dbManager->getTasksByUser(currentUserId);
 
     while (query.next()) {
         int id = query.value("id").toInt();

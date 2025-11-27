@@ -10,7 +10,7 @@ class AppController : public QObject {
 
 public:
     explicit AppController(QStackedWidget *stack, QObject *parent = nullptr);
-
+    int currentUserId = -1;
 public slots:
     void showAuthorization();
 
