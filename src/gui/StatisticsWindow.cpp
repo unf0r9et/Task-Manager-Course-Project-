@@ -22,17 +22,17 @@ StatisticsWindow::StatisticsWindow(QWidget *parent)
     backButton->setGeometry(10, 10, 80, 30);
     connect(backButton, &QPushButton::clicked, this, &StatisticsWindow::backToMenuClicked);
 
+    allChart = new CategoryPieChart("ВСЕ ЗАДАЧИ", this);
     studyChart = new CategoryPieChart("Учёба", this);
     personalChart = new CategoryPieChart("Хобби", this);
     workChart = new CategoryPieChart("Работа", this);
     otherChart = new CategoryPieChart("Другое", this);
-    allChart = new CategoryPieChart("ВСЕ ЗАДАЧИ", this);
 
-    allChart->setGeometry(1150, 50, 750, 750);
-    studyChart->setGeometry(20, 40, 350, 350);
-    personalChart->setGeometry(400, 40, 350, 350);
-    workChart->setGeometry(1100, 750, 350, 350);
-    otherChart->setGeometry(1325, 850, 350, 350);
+    allChart->setGeometry(625, 250, 750, 750);
+    studyChart->setGeometry(250, 100, 350, 350);
+    personalChart->setGeometry(1400, 100, 350, 350);
+    workChart->setGeometry(250, 800, 350, 350);
+    otherChart->setGeometry(1400, 800, 350, 350);
     loadStatistics();
 }
 

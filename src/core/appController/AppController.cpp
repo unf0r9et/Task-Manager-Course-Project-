@@ -13,12 +13,14 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     editTasks = new EditTasks();
     chatBotWindow = new ChatBotWindow();
     statisticsWindow = new StatisticsWindow();
+    calendarWindow = new CalendarWindow();
 
     registration->setDatabaseManager(&dbManager);
     authorization->setDatabaseManager(&dbManager);
     editTasks->setDatabaseManager(&dbManager);
     chatBotWindow->setDatabaseManager(&dbManager);
     statisticsWindow->setDatabaseManager(&dbManager);
+    calendarWindow->setDatabaseManager(&dbManager);
 
     stack->addWidget(authorization);
     stack->addWidget(registration);
@@ -26,7 +28,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     stack->addWidget(editTasks);
     stack->addWidget(chatBotWindow);
     stack->addWidget(statisticsWindow);
-
+    stack->addWidget(calendarWindow);
 
     connect(authorization, &Authorization::registerRequested, this, &AppController::showRegistration);
     connect(authorization, &Authorization::loginSuccessful, this, &AppController::showApplicationMenu);
@@ -34,9 +36,14 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(applicationMenu, &ApplicationMenu::editTasksRequested, this, &AppController::showEditTasks);
     connect(applicationMenu, &ApplicationMenu::chatBotWindowRequested, this, &AppController::showChatBotWindow);
     connect(applicationMenu, &ApplicationMenu::statisticsWindowRequested, this, &AppController::showStatisticsWindow);
+    connect(applicationMenu, &ApplicationMenu::calendarWindowRequested, this, &AppController::showCalendarWindow);
     connect(editTasks, &EditTasks::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(chatBotWindow, &ChatBotWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(statisticsWindow, &StatisticsWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
+    connect(calendarWindow, &CalendarWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
+
+
+
 }
 
 void AppController::showAuthorization() {
@@ -67,4 +74,9 @@ void AppController::showStatisticsWindow() {
     if (statisticsWindow->currentUserId == -1) statisticsWindow->currentUserId = currentUserId;
     statisticsWindow->loadStatistics();
     stack->setCurrentWidget(statisticsWindow);
+}
+
+void AppController::showCalendarWindow() {
+    if (calendarWindow->currentUserId == -1) calendarWindow->currentUserId = currentUserId;
+    stack->setCurrentWidget(calendarWindow);
 }

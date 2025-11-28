@@ -17,5 +17,5 @@ void ApplicationMenu::statisticsClicked() {
 }
 
 void ApplicationMenu::calendarClicked() {
-    emit calendarWidgetRequested();
+    emit calendarWindowRequested();
 }

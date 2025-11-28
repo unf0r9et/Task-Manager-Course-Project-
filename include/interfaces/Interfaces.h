@@ -8,6 +8,7 @@
 #include "../windows/EditTasks.h"
 #include "../windows/ChatBotWindow.h"
 #include "../windows/StatisticsWindow.h"
+#include "../windows/CalendarWindow.h"
 #include "../../src/core/appController/AppController.h"
 #include "../../src/gui/titlebar/TitleBar.h"
 

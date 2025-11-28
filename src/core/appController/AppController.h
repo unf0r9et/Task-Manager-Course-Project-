@@ -24,6 +24,8 @@ public slots:
 
     void showStatisticsWindow();
 
+    void showCalendarWindow();
+
 private:
     QStackedWidget *stack;
     Authorization *authorization;
@@ -33,6 +35,7 @@ private:
     DatabaseManager dbManager;
     ChatBotWindow *chatBotWindow;
     StatisticsWindow *statisticsWindow;
+    CalendarWindow *calendarWindow;
 };
 
 

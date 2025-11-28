@@ -18,7 +18,7 @@ public:
     void editTasksRequested();
     void chatBotWindowRequested();
     void statisticsWindowRequested();
-    void calendarWidgetRequested();
+    void calendarWindowRequested();
 
     private slots:
     void editTasksClicked();

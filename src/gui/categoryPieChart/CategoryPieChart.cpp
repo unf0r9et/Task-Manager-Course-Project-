@@ -26,7 +26,7 @@ void CategoryPieChart::paintEvent(QPaintEvent *) {
         painter.setPen(QPen(bgColor, 100));
     } else {
         fgColor = QColor(186, 65, 65);
-        painter.setPen(QPen(bgColor, 35));
+        painter.setPen(QPen(bgColor, 20));
     }
 
 
