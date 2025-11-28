@@ -65,5 +65,6 @@ void AppController::showChatBotWindow() {
 
 void AppController::showStatisticsWindow() {
     if (statisticsWindow->currentUserId == -1) statisticsWindow->currentUserId = currentUserId;
+    statisticsWindow->loadStatistics();
     stack->setCurrentWidget(statisticsWindow);
 }

@@ -6,8 +6,9 @@
 #define STATISTICSWINDOW_H
 
 #include <QWidget>
-#include "databaseManager/dataBaseUser/DataBaseUser.h"
 
+#include "../gui/categoryPieChart/CategoryPieChart.h"
+#include "databaseManager/dataBaseUser/DataBaseUser.h"
 
 class StatisticsWindow : public QWidget, public DataBaseUser {
     Q_OBJECT
@@ -17,11 +18,18 @@ public:
 
     int currentUserId = -1;
 
+    void loadStatistics();
+
 signals:
     void backToMenuClicked();
 
 private:
     void onBackButtonClicked();
+    CategoryPieChart *studyChart;
+    CategoryPieChart *personalChart;
+    CategoryPieChart *workChart;
+    CategoryPieChart *otherChart;
+    CategoryPieChart *allChart;
 };
 
 

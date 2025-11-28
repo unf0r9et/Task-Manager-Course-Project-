@@ -17,9 +17,12 @@ public:
                               const QString &category, const QDate &deadline);
     bool deleteTask(int taskId);
     bool updateTask(int taskId, const QString &title, const QString &description, const QString &category, const QDate &deadline);
-    bool updateTaskCompleteness(const int taskId, const bool completed);
+    bool updateTaskCompleteness(int taskId, bool completed);
     QSqlQuery getTasksByUser(int userId);
     int getUserId(const QString &username);
+    int getTotalTaskCount(int userId);
+    int getTaskCountByCategory(int userId, const QString &category, bool completed);
+
 private:
     QSqlDatabase db;
 };

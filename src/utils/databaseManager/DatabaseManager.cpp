@@ -158,3 +158,23 @@ int DatabaseManager::getUserId(const QString &username) {
     }
     return -1;
 }
+
+int DatabaseManager::getTotalTaskCount(int userId) {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM tasks WHERE user_id = ?");
+    query.addBindValue(userId);
+    query.exec();
+    if (query.next()) return query.value(0).toInt();
+    return 0;
+}
+
+int DatabaseManager::getTaskCountByCategory(int userId, const QString &category, bool completed) {
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(*) FROM tasks WHERE user_id = ? AND category = ? AND completed = ?");
+    query.addBindValue(userId);
+    query.addBindValue(category);
+    query.addBindValue(completed);
+    query.exec();
+    if (query.next()) return query.value(0).toInt();
+    return 0;
+}
