@@ -41,9 +41,6 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(chatBotWindow, &ChatBotWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(statisticsWindow, &StatisticsWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(calendarWindow, &CalendarWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
-
-
-
 }
 
 void AppController::showAuthorization() {
@@ -77,6 +74,6 @@ void AppController::showStatisticsWindow() {
 }
 
 void AppController::showCalendarWindow() {
-    if (calendarWindow->currentUserId == -1) calendarWindow->currentUserId = currentUserId;
+    calendarWindow->setUserId(currentUserId);
     stack->setCurrentWidget(calendarWindow);
 }
