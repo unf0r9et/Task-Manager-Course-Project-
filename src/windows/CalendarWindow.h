@@ -7,6 +7,13 @@
 #include <QMap>
 #include <QDate>
 #include "databaseManager/dataBaseUser/DataBaseUser.h"
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QDate>
+#include <QSqlQuery>
+#include "interfaces/WindowOptions.h"
 
 class QPushButton;
 class QLabel;
@@ -15,7 +22,6 @@ class CalendarWindow : public QWidget, public DataBaseUser {
     Q_OBJECT
 
 public:
-    int currentUserId = -1;
     explicit CalendarWindow(QWidget *parent = nullptr);
     void setUserId(int userId);
 
@@ -35,8 +41,8 @@ private:
     int currentYear;
     int currentMonth;
 
-    QMap<QDate, bool> deadlineDates; // Даты с задачами
-
+    QMap<QDate, bool> deadlineDates;
+    int currentUserId = -1;
     QLabel *monthLabel = nullptr;
     QPushButton *prevButton = nullptr;
     QPushButton *nextButton = nullptr;
