@@ -1,5 +1,6 @@
 // CalendarWindow.cpp
 #include "../windows/CalendarWindow.h"
+#include "styleloader/StyleLoader.h"
 
 CalendarWindow::CalendarWindow(QWidget *parent)
     : QWidget(parent) {
@@ -80,5 +81,6 @@ CalendarWindow::CalendarWindow(QWidget *parent)
 
     updateNavigation();
     showMonth(currentYear, currentMonth);
+ //   StyleLoader::loadStyleSheet(this, ":/styles/calendarWindow.qss");
 }
 

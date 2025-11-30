@@ -1,0 +1,32 @@
+/*
+ * statisticsWindow - Qt Style Sheet
+ * Created: 30.11.25
+ */
+
+/* Base styling */
+#StatisticsWindow {
+background-color: #121212;
+}
+
+QWidget {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+QPushButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #1f1f1f;
+    font-family:"D050000L";
+    font-size: 30px;
+}
+
+QLabel {
+   background: transparent;
+   border: none;
+   font-size:50px;
+   font-family:"DejaVu Math TeX Gyre";
+   color: #e0e0e0;
+}
+
+
+/* Add your QSS styles here */

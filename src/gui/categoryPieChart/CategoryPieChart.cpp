@@ -19,14 +19,13 @@ void CategoryPieChart::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing);
 
-    QColor bgColor = Qt::lightGray;
+    QColor bgColor = QColor(31, 31, 31);
     QColor fgColor;
+    fgColor = QColor(255, 255, 255);
     if (categoryName == "ВСЕ ЗАДАЧИ") {
-        fgColor = QColor(65, 65, 186);
         painter.setPen(QPen(bgColor, 100));
     } else {
-        fgColor = QColor(186, 65, 65);
-        painter.setPen(QPen(bgColor, 20));
+        painter.setPen(QPen(bgColor, 50));
     }
 
 
@@ -37,19 +36,17 @@ void CategoryPieChart::paintEvent(QPaintEvent *) {
 
     if (percent > 0) {
         if (categoryName == "ВСЕ ЗАДАЧИ") {
-            painter.setPen(QPen(fgColor, 80));
+            painter.setPen(QPen(fgColor, 70));
         } else {
-            painter.setPen(QPen(fgColor, 20));
+            painter.setPen(QPen(fgColor, 25));
         }
         painter.drawArc(rect, 90 * 16, -percent * 3.6 * 16);
     }
 
-    painter.setPen(Qt::black);
+    painter.setPen(Qt::white);
     QFont font = painter.font();
     font.setPointSize(12);
-   // font.setBold(true);
-    painter.setFont(font);
-    painter.drawText(rect, Qt::AlignTop | Qt::AlignHCenter, categoryName);
+
 
     if (categoryName == "ВСЕ ЗАДАЧИ") {
         font.setPointSize(80);
@@ -58,5 +55,5 @@ void CategoryPieChart::paintEvent(QPaintEvent *) {
     }
 
     painter.setFont(font);
-    painter.drawText(rect, Qt::AlignCenter, QString::number(percent) + "%");
+    painter.drawText(rect, Qt::AlignCenter, QString::number(percent) + "");
 }

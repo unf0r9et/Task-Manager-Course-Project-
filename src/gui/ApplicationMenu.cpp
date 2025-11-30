@@ -23,7 +23,11 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
     logoLayout->setAlignment(Qt::AlignCenter);
     logoLayout->setGeometry(700, 100, 600, 120);
 
-    const QPixmap photo(":/images/smth.png");
+    const QPixmap photo(":/images/jpeg.png");
+
+
+
+
 
     QTransform transform;
     transform.scale(-1, 1);
@@ -46,22 +50,29 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
 
     editTasksButton = new QPushButton(this);
     editTasksButton->setObjectName("editTasksButton");
-    editTasksButton->setText("Задачи");
+    editTasksButton->setText("       Задачи       ");
+    editTasksButton->setIcon(QIcon(":/icons/TASKS.png"));
+    editTasksButton->setIconSize(QSize(100, 100));
     editTasksButton->setGeometry(650, 450, sizeBut, 200);
 
     chatBotButton = new QPushButton(this);
     chatBotButton->setObjectName("chatBotButton");
     chatBotButton->setText("БРАНК");
+
     chatBotButton->setGeometry(1050, 450, sizeBut, 200);
 
     statisticsButton = new QPushButton(this);
     statisticsButton->setObjectName("statisticsButton");
-    statisticsButton->setText("Статистика");
+    statisticsButton->setText("    Статистика    ");
+    statisticsButton->setIcon(QIcon(":/icons/STAT.png"));
+    statisticsButton->setIconSize(QSize(100, 100));
     statisticsButton->setGeometry(1050, 700, sizeBut, 200);
 
     calendarButton = new QPushButton(this);
     calendarButton->setObjectName("calendarButton");
     calendarButton->setText("Календарь задач");
+    calendarButton->setIcon(QIcon(":/icons/CALENDAR.png"));
+    calendarButton->setIconSize(QSize(100, 100));
     calendarButton->setGeometry(650, 700, sizeBut, 200);
 
 

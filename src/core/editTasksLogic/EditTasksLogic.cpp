@@ -10,7 +10,6 @@
 #include "interfaces/WindowOptions.h"
 #include <QVBoxLayout>
 #include <QScrollArea>
-#include <QMessageBox>
 #include "../../windows/widgets/AddTaskWidgetMenu.h"
 #include "../../windows/widgets/EditingTaskMenu.h"
 
@@ -113,7 +112,6 @@ void EditTasks::onEditingTask(int taskId) {
 
 void EditTasks::onCompletedChanged(int taskId, bool completed) {
     if (dbManager && dbManager->updateTaskCompleteness(taskId, completed)) {
-        QMessageBox::information(this, "Status", "Task status updated.");
     }
 }
 

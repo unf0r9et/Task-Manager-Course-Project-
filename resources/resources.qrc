@@ -6,6 +6,7 @@
         <file>styles/editTasks.qss</file>
         <file>styles/registration.qss</file>
         <file>styles/applicationMenu.qss</file>
+        <file>styles/statisticsWindow.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>
@@ -15,6 +16,9 @@
         <file>icons/LOGO.png</file>
         <file>icons/lock.png</file>
         <file>icons/man.png</file>
+        <file>icons/CALENDAR.png</file>
+        <file>icons/STAT.png</file>
+        <file>icons/TASKS.png</file>
 
 
         <file>fonts/pikseli-prosto-regular.ttf</file>
