@@ -1,4 +1,4 @@
-#Authorization {
+#Registration {
 background-color: #121212;
 }
 
@@ -30,7 +30,6 @@ QPushButton:pressed {
     background-color: #555555;
 }
 
-/* Поля ввода */
 QLineEdit {
     font-family: Helvetica;
     background-color: #1e1e1e;

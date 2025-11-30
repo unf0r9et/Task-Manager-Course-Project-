@@ -1,0 +1,28 @@
+/*
+ * applicationMenu - Qt Style Sheet
+ * Created: 30.11.25
+ */
+
+/* Base styling */
+
+#ApplicationMenu {
+background-color: #121212;
+}
+
+QWidget {
+    background-color: #121212;   /* тёмный фон */
+    color: #e0e0e0;
+}
+
+QPushButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-family:"D050000L";
+    font-size: 20px;
+}
+
+
+/* Add your QSS styles here */

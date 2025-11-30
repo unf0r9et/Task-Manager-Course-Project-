@@ -4,9 +4,22 @@
         <file>styles/authorization.qss</file>
         <file>styles/titlebar.qss</file>
         <file>styles/editTasks.qss</file>
+        <file>styles/registration.qss</file>
+        <file>styles/applicationMenu.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>
         <file>images/IMG_7157.PNG</file>
+        <file>images/jpeg.png</file>
+        <file>images/smth.png</file>
+        <file>icons/LOGO.png</file>
+        <file>icons/lock.png</file>
+        <file>icons/man.png</file>
+
+
+        <file>fonts/pikseli-prosto-regular.ttf</file>
+        <file>fonts/SanghaKali-Regular.otf</file>
     </qresource>
+
+
 </RCC>
