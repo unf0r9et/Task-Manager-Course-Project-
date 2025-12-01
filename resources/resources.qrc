@@ -7,18 +7,19 @@
         <file>styles/registration.qss</file>
         <file>styles/applicationMenu.qss</file>
         <file>styles/statisticsWindow.qss</file>
+        <file>styles/chatBotWindow.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>
-        <file>images/IMG_7157.PNG</file>
         <file>images/jpeg.png</file>
-        <file>images/smth.png</file>
+        <file>images/BRANK.png</file>
         <file>icons/LOGO.png</file>
         <file>icons/lock.png</file>
         <file>icons/man.png</file>
         <file>icons/CALENDAR.png</file>
         <file>icons/STAT.png</file>
         <file>icons/TASKS.png</file>
+        <file>icons/AI.png</file>
 
 
         <file>fonts/pikseli-prosto-regular.ttf</file>

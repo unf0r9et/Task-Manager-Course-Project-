@@ -1,0 +1,65 @@
+/*
+ * сhatBotWindow - Qt Style Sheet
+ * Created: 01.12.25
+ */
+
+/* Base styling */
+
+#ChatBotWindow {
+background-color: #121212;
+}
+
+QWidget {
+    background-color: #121212;   /* тёмный фон */
+    color: #e0e0e0;
+}
+
+/* Кнопки */
+QPushButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #1f1f1f;
+    border-radius: 5px;
+    font-family:"Liberation Mono";
+}
+
+QPushButton:hover {
+    background-color: #333333;
+}
+
+QPushButton:pressed {
+    background-color: #555555;
+}
+
+/* Поля ввода */
+QTextEdit {
+    font-family: Helvetica;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #1e1e1e;
+    font-size: 50px;
+}
+
+/* Метки */
+QLabel {
+    background: transparent;
+}
+
+/* Контейнеры */
+QStackedWidget {
+    background-color: #121212;
+}
+
+QToolTip {
+    background-color: #333333;
+    color: #e0e0e0;
+    border: 1px solid #555555;
+}
+
+
+#output {
+background-color: #1f1f1f;
+font-size: 20px;
+}
+
+/* Add your QSS styles here */

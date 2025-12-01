@@ -57,8 +57,9 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
 
     chatBotButton = new QPushButton(this);
     chatBotButton->setObjectName("chatBotButton");
-    chatBotButton->setText("БРАНК");
-
+    chatBotButton->setText("    БРАНК       ");
+    chatBotButton->setIcon(QIcon(":/icons/AI.png"));
+    chatBotButton->setIconSize(QSize(140, 140));
     chatBotButton->setGeometry(1050, 450, sizeBut, 200);
 
     statisticsButton = new QPushButton(this);

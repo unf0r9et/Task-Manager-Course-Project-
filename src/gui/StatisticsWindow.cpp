@@ -34,7 +34,7 @@ StatisticsWindow::StatisticsWindow(QWidget *parent)
     QPixmap mirrored = stretched.transformed(transform, Qt::SmoothTransformation);
 
 
-    int size = 30;
+    int size = 24;
 
     auto *photoLayout = new QLabel(this);
     photoLayout->setPixmap(stretched.scaled(800, 120, Qt::KeepAspectRatioByExpanding,

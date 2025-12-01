@@ -15,7 +15,7 @@
 using json = nlohmann::json;
 
 void ChatBotWindow::sendRequest() {
-    QString request = input->text();
+    QString request = input->toPlainText();
     std::string requestSTD = request.toStdString();
 
     std::string access_token = ChatBot::get_access_token();
@@ -52,13 +52,13 @@ void ChatBotWindow::onAddTaskPressed() {
 
         if (dbManager) dbManager->addTask(currentUserId, title, description, category, deadline);
         else {
-            QMessageBox::critical(this, "Error", "Failed to add task.");
+            QMessageBox::critical(this, "ОШИБКА", "ОШИБКА при добавлении задачи.");
         }
     } catch (const json::parse_error &e) {
-        QMessageBox::critical(this, "Error", "Failed to add task.");
+        QMessageBox::critical(this, "ОШИБКА", "ОШИБКА при добавлении задачи.");
         qCritical() << "JSON parse error:" << e.what();
     } catch (const std::exception &e) {
-        QMessageBox::critical(this, "Error", "Failed to add task.");
+        QMessageBox::critical(this, "ОШИБКА", "ОШИБКА при добавлении задачи.");
         qCritical() << "General error:" << e.what();
     }
     resetWidget();
@@ -76,5 +76,5 @@ void ChatBotWindow::onBackButtonClicked() {
 void ChatBotWindow::resetWidget() {
     lastResponse = nullptr;
     input->setText("");
-    output->setText("");
+    output->setText("Привет! Я БРАНК. Введи краткое описание того,\nчто тебе надо сделать. И я придумаю все остальное =)");
 }

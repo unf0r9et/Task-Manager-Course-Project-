@@ -6,7 +6,7 @@
 #define CHATBOTWINDOW_H
 
 #include <QLabel>
-#include <QLineEdit>
+#include <QTextEdit>
 #include <QWidget>
 #include <QPushButton>
 #include <QVBoxLayout>
@@ -43,7 +43,7 @@ private:
     void resetWidget();
 
     QString lastResponse;
-    QLineEdit *input;
+    QTextEdit *input;
     QLabel *output;
 };
 
