@@ -23,6 +23,7 @@ StatisticsWindow::StatisticsWindow(QWidget *parent)
 
     auto *backButton = new QPushButton("←", this);
     backButton->setGeometry(10, 10, 100, 50);
+    backButton->setObjectName("BackButton");
     connect(backButton, &QPushButton::clicked, this, &StatisticsWindow::backToMenuClicked);
 
     const QPixmap photo(":/images/jpeg.png");
@@ -36,45 +37,45 @@ StatisticsWindow::StatisticsWindow(QWidget *parent)
 
     int size = 24;
 
-    auto *photoLayout = new QLabel(this);
-    photoLayout->setPixmap(stretched.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
-    photoLayout->setAlignment(Qt::AlignCenter);
-    photoLayout->setGeometry(1000-size/2, 900, size, 400);
-
-    auto *photoLayout_2 = new QLabel(this);
-    photoLayout_2->setPixmap(mirrored.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
-    photoLayout_2->setAlignment(Qt::AlignCenter);
-    photoLayout_2->setGeometry(1000-size/2, 0, size, 300);
-
-    auto *photoLayout_3 = new QLabel(this);
-    photoLayout_3->setPixmap(stretched.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
-    photoLayout_3->setAlignment(Qt::AlignCenter);
-    photoLayout_3->setGeometry(0, 625-size/2, 700, size);
-
-auto *photoLayout_4 = new QLabel(this);
-    photoLayout_4->setPixmap(mirrored.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
-    photoLayout_4->setAlignment(Qt::AlignCenter);
-    photoLayout_4->setGeometry(1300, 625-size/2, 700, size);
+//     auto *photoLayout = new QLabel(this);
+//     photoLayout->setPixmap(stretched.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
+//                                       Qt::SmoothTransformation));
+//     photoLayout->setAlignment(Qt::AlignCenter);
+//     photoLayout->setGeometry(1000-size/2, 900, size, 400);
+//
+//     auto *photoLayout_2 = new QLabel(this);
+//     photoLayout_2->setPixmap(mirrored.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
+//                                       Qt::SmoothTransformation));
+//     photoLayout_2->setAlignment(Qt::AlignCenter);
+//     photoLayout_2->setGeometry(1000-size/2, 0, size, 300);
+//
+//     auto *photoLayout_3 = new QLabel(this);
+//     photoLayout_3->setPixmap(stretched.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
+//                                       Qt::SmoothTransformation));
+//     photoLayout_3->setAlignment(Qt::AlignCenter);
+//     photoLayout_3->setGeometry(0, 625-size/2, 700, size);
+//
+// auto *photoLayout_4 = new QLabel(this);
+//     photoLayout_4->setPixmap(mirrored.scaled(800, 120, Qt::KeepAspectRatioByExpanding,
+//                                       Qt::SmoothTransformation));
+//     photoLayout_4->setAlignment(Qt::AlignCenter);
+//     photoLayout_4->setGeometry(1300, 625-size/2, 700, size);
 
     auto *textStudy = new QLabel(this);
     textStudy->setText("УЧЁБА");
-    textStudy->setGeometry(345, 300, 350, 350);
+    textStudy->setGeometry(350, 300, 350, 350);
     auto *textHobby = new QLabel(this);
     textHobby->setText("ХОББИ");
-    textHobby->setGeometry(1500, 300, 350, 350);
+    textHobby->setGeometry(1495, 300, 350, 350);
     auto *textWork = new QLabel(this);
     textWork->setText("РАБОТА");
-    textWork->setGeometry(333, 970, 350, 350);
+    textWork->setGeometry(330, 970, 350, 350);
     auto *textAnother = new QLabel(this);
     textAnother->setText("ДРУГОЕ");
-    textAnother->setGeometry(1487, 970, 350, 350);
+    textAnother->setGeometry(1483, 970, 350, 350);
     auto *textAll = new QLabel(this);
     textAll->setText("ВСЕ ЗАДАЧИ");
-    textAll->setGeometry(850, 550, 350, 350);
+    textAll->setGeometry(853, 900, 350, 350);
 
 
 

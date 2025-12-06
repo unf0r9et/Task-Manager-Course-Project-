@@ -1,0 +1,47 @@
+/*
+ * editingTaskMenu - Qt Style Sheet
+ * Created: 04.12.25
+ */
+
+/* Base styling */
+QWidget {
+background-color: #303030;
+color:#e0e0e0;
+
+}
+
+#AddTaskMenu {
+background-color: #1f1f1f;
+}
+
+/* Кнопки */
+QPushButton {
+      color: #e0e0e0;
+      border: 1px solid #1f1f1f;
+      font-family:"D050000L";
+      font-size: 20px;
+}
+
+QLabel {
+font-size: 25px;
+color:#e0e0e0;
+background: transparent;
+}
+
+QTextEdit {
+font-size: 20px;
+}
+
+QLineEdit {
+font-size: 20px;
+}
+
+QComboBox {
+font-size: 20px;
+}
+
+QDateEdit {
+font-size: 20px;
+}
+
+/* Add your QSS styles here */

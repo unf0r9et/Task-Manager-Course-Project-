@@ -1,0 +1,43 @@
+/*
+ * taskCardWidget - Qt Style Sheet
+ * Created: 05.12.25
+ */
+
+/* Base styling */
+
+#TaskCard {
+    background-color: #121212;
+}
+
+QLabel {
+      background: transparent;
+      color: #e0e0e0;
+      font-size: 15px;
+}
+
+#DeadlineLabel {
+font-size: 20px;
+}
+
+#CategoryLabel {
+font-size: 20px;
+}
+
+#DescriptionLabel {
+font-size: 20px;
+}
+
+#TitleLabel {
+font-size: 30px;
+}
+
+
+QPushButton {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+      border: 1px solid #1f1f1f;
+      font-family:"D050000L";
+      font-size: 30px;
+}
+
+/* Add your QSS styles here */

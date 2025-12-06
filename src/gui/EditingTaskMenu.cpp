@@ -7,11 +7,13 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include "styleloader/StyleLoader.h"
 
 
 EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, int taskId) : QWidget(parent),
     taskId(taskId), dbManager(dbManager) {
     setAttribute(Qt::WA_StyledBackground, true);
+    setObjectName("EditingTaskMenu");
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Что будем делать?");
 
@@ -26,9 +28,9 @@ EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, in
     deadlineEdit->setCalendarPopup(true);
 
     auto buttonAccept = new QPushButton(this);
-    buttonAccept->setText("OK");
+    buttonAccept->setText("ОК");
     auto buttonReject = new QPushButton(this);
-    buttonReject->setText("NO");
+    buttonReject->setText("ОТМЕНА");
     auto buttonDelete = new QPushButton(this);
     buttonDelete->setText("Удалить");
 
@@ -51,5 +53,5 @@ EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, in
     connect(buttonAccept, &QPushButton::clicked, this, &EditingTaskMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &EditingTaskMenu::onRejectClicked);
     connect(buttonDelete, &QPushButton::clicked, this, &EditingTaskMenu::onDeleteClicked);
+    StyleLoader::loadStyleSheet(this, ":/styles/editingTaskMenu.qss");
 }
-

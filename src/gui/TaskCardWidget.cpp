@@ -5,12 +5,15 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QDate>
+#include "styleloader/StyleLoader.h"
+
 
 TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &description,
                                const QString &category, const QDate &deadline, bool completed,
                                QWidget *parent)
     : QWidget(parent), taskId(taskId) {
     setObjectName("TaskCard");
+    setAttribute(Qt::WA_StyledBackground, true);
 
     completedCheckBox = new QCheckBox(this);
     completedCheckBox->setChecked(completed);
@@ -28,15 +31,17 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
 
     deadlineLabel = new QLabel(deadline.toString("dd.MM.yyyy"), this);
     deadlineLabel->setObjectName("DeadlineLabel");
+
+
     QDate today = QDate::currentDate();
     if (deadline < today) {
-        deadlineLabel->setStyleSheet("color: red; font-weight: bold;");
+        deadlineLabel->setStyleSheet("color: #771213; font-weight: bold;");
     } else {
         deadlineLabel->setStyleSheet("");
     }
 
 
-    deleteButton = new QPushButton("Р", this);
+    deleteButton = new QPushButton(".", this);
     deleteButton->setFixedSize(50, 50);
     connect(deleteButton, &QPushButton::clicked, this, &TaskCardWidget::onEditingClicked);
 
@@ -56,20 +61,21 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
     mainLayout->addWidget(descriptionLabel);
     mainLayout->addLayout(infoLayout);
 
-    setMinimumHeight(100);
-    setMaximumHeight(200);
+    setMinimumHeight(200);
+    setMaximumHeight(230);
 
     if (completed) {
         titleLabel->setStyleSheet("text-decoration: line-through;");
         descriptionLabel->setStyleSheet("color: gray;");
     }
+    StyleLoader::loadStyleSheet(this, ":/styles/taskCardWidget.qss");
 }
 
 void TaskCardWidget::onCompletedChanged() {
     emit completedChanged(taskId, completedCheckBox->isChecked());
     if (completedCheckBox->isChecked()) {
         titleLabel->setStyleSheet("text-decoration: line-through;");
-        descriptionLabel->setStyleSheet("color: red;");
+        descriptionLabel->setStyleSheet("color: #771213;");
     } else {
         titleLabel->setStyleSheet("");
         descriptionLabel->setStyleSheet("");

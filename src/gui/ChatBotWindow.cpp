@@ -46,6 +46,7 @@ ChatBotWindow::ChatBotWindow(QWidget *parent) : QWidget(parent) {
 
     auto *backButton = new QPushButton("←", this);
     backButton->setGeometry(10, 10, 100, 50);
+    backButton->setObjectName("backButton");
 
     auto *sendButton = new QPushButton("Отправить", this);
     sendButton->setGeometry(860, 725, 90, 140);

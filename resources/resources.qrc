@@ -8,6 +8,9 @@
         <file>styles/applicationMenu.qss</file>
         <file>styles/statisticsWindow.qss</file>
         <file>styles/chatBotWindow.qss</file>
+        <file>styles/editingTaskMenu.qss</file>
+        <file>styles/taskCardWidget.qss</file>
+        <file>styles/addTaskMenu.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>

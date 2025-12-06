@@ -4,9 +4,51 @@
  */
 
 /* Base styling */
+#EditTasks {
+background-color: #121212;
+}
+
+
+#TaskButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #333333;
+    font-size: 40px;
+    font-family:"FreeMono";
+}
+
+#BackButton {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+      border: 1px solid #1f1f1f;
+      font-family:"D050000L";
+      font-size: 40px;
+}
+
 QWidget {
     background-color: #f0f0f0;
     color: #272B30;
+}
+
+QScrollBar:vertical {
+    background: #f0f0f0;
+    width: 12px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #333333;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #333333;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    background: none;
+    height: 0px;
 }
 
 /* Add your QSS styles here */

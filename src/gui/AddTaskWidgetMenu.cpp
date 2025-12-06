@@ -3,12 +3,13 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include "styleloader/StyleLoader.h"
 
 
 AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUserId, QWidget *parent)
     : QWidget(parent), dbManager(dbManager), currentUserId(currentUserId) {
     setAttribute(Qt::WA_StyledBackground, true);
-
+    setObjectName("AddTaskMenu");
     titleEdit = new QLineEdit(this);
     titleEdit->setPlaceholderText("Что будем делать?");
 
@@ -23,9 +24,9 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUser
     deadlineEdit->setCalendarPopup(true);
 
     auto buttonAccept = new QPushButton(this);
-    buttonAccept->setText("OK");
+    buttonAccept->setText("ОК");
     auto buttonReject = new QPushButton(this);
-    buttonReject->setText("NO");
+    buttonReject->setText("ОТМЕНА");
 
     auto *mainLayout = new QVBoxLayout(this);
     mainLayout->addWidget(new QLabel("Название"));
@@ -44,5 +45,6 @@ AddTaskWidgetMenu::AddTaskWidgetMenu(DatabaseManager *dbManager, int currentUser
     setLayout(mainLayout);
     connect(buttonAccept, &QPushButton::clicked, this, &AddTaskWidgetMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &AddTaskWidgetMenu::onRejectClicked);
-    //  this->setStyleSheet("background-color: gray;");
+    StyleLoader::loadStyleSheet(this, ":/styles/addTaskMenu.qss");
+
 }
