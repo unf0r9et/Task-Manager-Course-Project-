@@ -15,7 +15,7 @@
 
 void EditTasks::onAddTaskClicked() {
     if (!dbManager) {
-        QMessageBox::critical(this, "Error", "Database is not initialized.");
+        QMessageBox::critical(this, "Ошибка", "База данных не инициализирована.");
         return;
     }
 
@@ -92,7 +92,7 @@ void EditTasks::addTaskCard(int taskId, const QString &title, const QString &des
 
 void EditTasks::onEditingTask(int taskId) {
     if (!dbManager) {
-        QMessageBox::critical(this, "Error", "Database is not initialized.");
+        QMessageBox::critical(this, "Ошибка", "База данных не инициализирована.");
         return;
     }
     addTaskButton->hide();

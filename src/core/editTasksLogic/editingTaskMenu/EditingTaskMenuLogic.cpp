@@ -8,7 +8,7 @@
 void EditingTaskMenu::onAcceptClicked() {
     QString title = titleEdit->text().trimmed();
     if (title.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Title cannot be empty.");
+        QMessageBox::warning(this, "Ошибка", "Заголовок не может быть пустым.");
         return;
     }
     QString description = descriptionEdit->toPlainText();
@@ -18,10 +18,10 @@ void EditingTaskMenu::onAcceptClicked() {
         if (dbManager->updateTask(taskId, title, description, category, deadline)) {
             emit taskWasEdited();
         } else {
-            QMessageBox::critical(this, "Error", "Failed to edit task.");
+            QMessageBox::critical(this, "Ошибка", "Не удалось изменить задачу.");
         }
     } else {
-        QMessageBox::critical(this, "Error", "Database is not initialized.");
+        QMessageBox::critical(this, "Ошибка", "База данных не инициализирована.");
     }
 }
 
@@ -33,6 +33,6 @@ void EditingTaskMenu::onDeleteClicked() {
     if (dbManager && dbManager->deleteTask(taskId)) {
         emit taskWasDeleted();
     } else {
-        QMessageBox::critical(this, "Error", "Failed to delete task.");
+        QMessageBox::critical(this, "Ошибка", "Не удалось удалить задачу.");
     }
 }

@@ -10,7 +10,7 @@
 void AddTaskWidgetMenu::onAcceptClicked() {
     QString title = titleEdit->text().trimmed();
     if (title.isEmpty()) {
-        QMessageBox::warning(this, "Error", "Title cannot be empty.");
+        QMessageBox::warning(this, "Ошибка", "Заголовок не может быть пустым.");
         return;
     }
 
@@ -22,10 +22,10 @@ void AddTaskWidgetMenu::onAcceptClicked() {
         if (dbManager->addTask(currentUserId, title, description, category, deadline)) {
             emit taskWasAdded();
         } else {
-            QMessageBox::critical(this, "Error", "Failed to add task.");
+            QMessageBox::critical(this, "Ошибка", "Не удалось добавить задачу.");
         }
     } else {
-        QMessageBox::critical(this, "Error", "Database is not initialized.");
+        QMessageBox::critical(this, "Ошибка", "База данных не инициализирована.");
     }
 }
 

@@ -26,9 +26,6 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
     const QPixmap photo(":/images/jpeg.png");
 
 
-
-
-
     QTransform transform;
     transform.scale(-1, 1);
 
@@ -37,15 +34,14 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
 
     auto *photoLayout = new QLabel(this);
     photoLayout->setPixmap(stretched.scaled(600, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
+                                            Qt::SmoothTransformation));
     photoLayout->setAlignment(Qt::AlignCenter);
     photoLayout->setGeometry(0, 0, 500, 1250);
     auto *photoLayout_2 = new QLabel(this);
     photoLayout_2->setPixmap(mirrored.scaled(600, 120, Qt::KeepAspectRatioByExpanding,
-                                      Qt::SmoothTransformation));
+                                             Qt::SmoothTransformation));
     photoLayout_2->setAlignment(Qt::AlignCenter);
     photoLayout_2->setGeometry(1500, 0, 500, 1250);
-
 
 
     editTasksButton = new QPushButton(this);
@@ -77,9 +73,15 @@ ApplicationMenu::ApplicationMenu(QWidget *parent) : QWidget(parent) {
     calendarButton->setGeometry(650, 700, sizeBut, 200);
 
 
+    auto logoutButton = new QPushButton(this);
+    logoutButton->setText("ВЫЙТИ");
+    logoutButton->setObjectName("logoutButton");
+    logoutButton->setGeometry(20, 1180, 100, 50);
+
     connect(editTasksButton, &QPushButton::clicked, this, &ApplicationMenu::editTasksClicked);
     connect(chatBotButton, &QPushButton::clicked, this, &ApplicationMenu::chatBotClicked);
     connect(statisticsButton, &QPushButton::clicked, this, &ApplicationMenu::statisticsClicked);
     connect(calendarButton, &QPushButton::clicked, this, &ApplicationMenu::calendarClicked);
+    connect(logoutButton, &QPushButton::clicked, this, &ApplicationMenu::logoutClicked);
     StyleLoader::loadStyleSheet(this, ":/styles/applicationMenu.qss");
 }

@@ -19,3 +19,7 @@ void ApplicationMenu::statisticsClicked() {
 void ApplicationMenu::calendarClicked() {
     emit calendarWindowRequested();
 }
+
+void ApplicationMenu::logoutClicked() {
+    emit logout();
+}

@@ -19,29 +19,45 @@ QPushButton {
       color: #e0e0e0;
       border: 1px solid #1f1f1f;
       font-family:"D050000L";
-      font-size: 20px;
+      font-size: 25px;
 }
 
 QLabel {
-font-size: 25px;
+font-size: 30px;
 color:#e0e0e0;
 background: transparent;
 }
 
 QTextEdit {
-font-size: 20px;
+font-size: 25px;
 }
 
 QLineEdit {
-font-size: 20px;
+font-size: 25px;
 }
 
 QComboBox {
-font-size: 20px;
+font-size: 25px;
 }
 
 QDateEdit {
-font-size: 20px;
+font-size: 25px;
 }
+
+QCalendarWidget QToolButton {
+    height: 40px;
+    width: 100px;
+    icon-size: 20px 20px;
+    font-size: 18px;
+}
+
+QCalendarWidget QTableView {
+    font-size: 18px;
+}
+
+QCalendarWidget QTableView::item {
+    padding: 10px;
+}
+
 
 /* Add your QSS styles here */

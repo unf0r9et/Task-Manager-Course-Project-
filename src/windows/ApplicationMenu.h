@@ -19,12 +19,14 @@ public:
     void chatBotWindowRequested();
     void statisticsWindowRequested();
     void calendarWindowRequested();
+    void logout();
 
     private slots:
     void editTasksClicked();
     void chatBotClicked();
     void statisticsClicked();
     void calendarClicked();
+    void logoutClicked();
 
     private:
     QPushButton *editTasksButton;

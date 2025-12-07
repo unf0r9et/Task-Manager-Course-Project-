@@ -37,6 +37,7 @@ AppController::AppController(QStackedWidget *stack, QObject *parent)
     connect(applicationMenu, &ApplicationMenu::chatBotWindowRequested, this, &AppController::showChatBotWindow);
     connect(applicationMenu, &ApplicationMenu::statisticsWindowRequested, this, &AppController::showStatisticsWindow);
     connect(applicationMenu, &ApplicationMenu::calendarWindowRequested, this, &AppController::showCalendarWindow);
+    connect(applicationMenu, &ApplicationMenu::logout, this, &AppController::showAuthorization);
     connect(editTasks, &EditTasks::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(chatBotWindow, &ChatBotWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
     connect(statisticsWindow, &StatisticsWindow::backToMenuClicked, this, &AppController::showApplicationMenu);
@@ -57,18 +58,18 @@ void AppController::showApplicationMenu() {
 }
 
 void AppController::showEditTasks() {
-    if (editTasks->currentUserId == -1) editTasks->currentUserId = currentUserId;
+    editTasks->currentUserId = currentUserId;
     editTasks->showAllTasks();
     stack->setCurrentWidget(editTasks);
 }
 
 void AppController::showChatBotWindow() {
-    if (chatBotWindow->currentUserId == -1) chatBotWindow->currentUserId = currentUserId;
+    chatBotWindow->currentUserId = currentUserId;
     stack->setCurrentWidget(chatBotWindow);
 }
 
 void AppController::showStatisticsWindow() {
-    if (statisticsWindow->currentUserId == -1) statisticsWindow->currentUserId = currentUserId;
+    statisticsWindow->currentUserId = currentUserId;
     statisticsWindow->loadStatistics();
     stack->setCurrentWidget(statisticsWindow);
 }

@@ -10,10 +10,12 @@
 #include "databaseManager/DatabaseManager.h"
 
 void Authorization::onLoginClicked() {
-    if (checkingLoginAndPassword())
+    if (checkingLoginAndPassword()) {
+        loginEdit->setText("");
+        passwordEdit->setText("");
         emit loginSuccessful();
-    else
-        QMessageBox::warning(this, "Error", "Incorrect login or password.");
+    } else
+        QMessageBox::warning(this, "Ошибка", "Неверный логин или пароль.");
 }
 
 

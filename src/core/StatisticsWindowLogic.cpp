@@ -13,7 +13,6 @@ void StatisticsWindow::loadStatistics() {
     if (!dbManager || currentUserId == -1) return;
 
     int total = dbManager->getTotalTaskCount(currentUserId);
-    if (total == 0) total = 1;
 
 
     int studyDone = dbManager->getTaskCountByCategory(currentUserId, "Учёба", true);
@@ -27,9 +26,9 @@ void StatisticsWindow::loadStatistics() {
     int other = dbManager->getTaskCountByCategory(currentUserId, "Другое", false);
 
 
-    studyChart->setValue(100 * studyDone / (study + studyDone));
-    personalChart->setValue(100 * personalDone / (personal + personalDone));
-    workChart->setValue(100 * workDone / (work + workDone));
-    otherChart->setValue(100 * otherDone / (other + otherDone));
-    allChart->setValue(100 * (studyDone + personalDone + workDone + otherDone) / total);
+    studyChart->setValue(study == 0 ? 0 : 100 * studyDone / (study + studyDone));
+    personalChart->setValue(personalDone == 0 ? 0 : 100 * personalDone / (personal + personalDone));
+    workChart->setValue(workDone == 0 ? 0 : 100 * workDone / (work + workDone));
+    otherChart->setValue(otherDone == 0 ? 0 : 100 * otherDone / (other + otherDone));
+    allChart->setValue(total == 0 ? 0 : 100 * (studyDone + personalDone + workDone + otherDone) / total);
 }
