@@ -6,21 +6,34 @@ CalendarWindow::CalendarWindow(QWidget *parent)
     : QWidget(parent) {
     setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     setObjectName("CalendarWindow");
+    setAttribute(Qt::WA_StyledBackground, true);
 
-    auto *backButton = new QPushButton("Back", this);
-    backButton->setGeometry(10, 10, 80, 30);
+
+    auto *label = new QLabel(this);
+    label->setText("Задачи на выбранную дату:");
+    label->setGeometry(20, 460, 600, 100);
+    label->setObjectName("Label");
+    auto *backButton = new QPushButton("←", this);
+    backButton->setGeometry(10, 10, 100, 50);
+    backButton->setObjectName("BackButton");
     connect(backButton, &QPushButton::clicked, this, &CalendarWindow::onBackButtonClicked);
 
     prevButton = new QPushButton("<", this);
     nextButton = new QPushButton(">", this);
+    prevButton->setFixedWidth(100);
+    nextButton->setFixedWidth(100);
     monthLabel = new QLabel(this);
     monthLabel->setAlignment(Qt::AlignCenter);
-    monthLabel->setStyleSheet("font-size: 16px; font-weight: bold;");
+    monthLabel->setStyleSheet("font-size: 30px; font-weight: bold;");
 
     auto *navLayout = new QHBoxLayout();
+    navLayout->addStretch();
     navLayout->addWidget(prevButton);
+    navLayout->addSpacing(15);
     navLayout->addWidget(monthLabel);
+    navLayout->addSpacing(15);
     navLayout->addWidget(nextButton);
+    navLayout->addStretch();
 
     connect(prevButton, &QPushButton::clicked, this, [this]() {
         if (currentMonth == 1) {
@@ -49,7 +62,7 @@ CalendarWindow::CalendarWindow(QWidget *parent)
     for (int i = 0; i < 7; ++i) {
         auto *label = new QLabel(weekdays[i]);
         label->setAlignment(Qt::AlignCenter);
-        label->setStyleSheet("font-weight: bold; background-color: #f0f0f0;");
+        label->setStyleSheet("font-weight: bold; background-color: #1f1f1f; font-size: 20px;");
         gridLayout->addWidget(label, 0, i);
     }
 
@@ -57,20 +70,23 @@ CalendarWindow::CalendarWindow(QWidget *parent)
         for (int col = 0; col < 7; ++col) {
             auto *button = new QPushButton(this);
             button->setFixedSize(100, 40);
-            button->setStyleSheet("QPushButton { background-color: white; border: 1px solid #ccc; }"
-                                  "QPushButton:hover { background-color: #e0e0e0; }");
+            button->setStyleSheet("QPushButton { background-color: #1f1f1f;}"
+                "QPushButton:hover { background-color: #2f2f2f; }");
             gridLayout->addWidget(button, row + 1, col);
             dayButtons.append(button);
         }
     }
 
     taskList = new QListWidget(this);
-    taskList->setMaximumHeight(120);
+    taskList->setObjectName("TaskList");
+    taskList->setMaximumHeight(700);
 
     auto *mainLayout = new QVBoxLayout();
+    mainLayout->addSpacing(80);
     mainLayout->addLayout(navLayout);
+    mainLayout->addSpacing(20);
     mainLayout->addLayout(gridLayout);
-    mainLayout->addWidget(new QLabel("Задачи на выбранную дату:"));
+    mainLayout->addWidget(new QLabel(this));
     mainLayout->addWidget(taskList);
 
     setLayout(mainLayout);
@@ -81,6 +97,5 @@ CalendarWindow::CalendarWindow(QWidget *parent)
 
     updateNavigation();
     showMonth(currentYear, currentMonth);
- //   StyleLoader::loadStyleSheet(this, ":/styles/calendarWindow.qss");
+    StyleLoader::loadStyleSheet(this, ":/styles/calendarWindow.qss");
 }
-

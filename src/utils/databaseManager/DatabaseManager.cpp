@@ -149,6 +149,14 @@ QSqlQuery DatabaseManager::getTasksByUser(int userId) {
     return query;
 }
 
+QSqlQuery DatabaseManager::getTaskById(int taskId) {
+    QSqlQuery query;
+    query.prepare("SELECT * FROM tasks WHERE id = ?");
+    query.addBindValue(taskId);
+    query.exec();
+    return query;
+}
+
 int DatabaseManager::getUserId(const QString &username) {
     QSqlQuery query;
     query.prepare("SELECT id FROM users WHERE username = ?");

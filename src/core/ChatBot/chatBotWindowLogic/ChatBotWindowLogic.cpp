@@ -27,11 +27,25 @@ void ChatBotWindow::sendRequest() {
     std::string response = ChatBot::extractContent(
         ChatBot::send_request_to_gigachat(requestSTD, access_token)
     );
+
     lastResponse = QString::fromStdString(response);
+
+    json parsed = json::parse(lastResponse.toStdString());
+
+    QString title = QString::fromStdString(parsed["title"].get<std::string>());
+    QString description = QString::fromStdString(parsed["description"].get<std::string>());
+    QString category = QString::fromStdString(parsed["category"].get<std::string>());
+    QString deadlineStr = QString::fromStdString(parsed["deadline"].get<std::string>());
+
+    QString outputStr = "<b>∘ Название: </b>" + title +
+                        "<br><b>∘ Описание: </b>" + description +
+                        "<br><b>∘ Категория: </b>" + category +
+                        "<br><b>∘ Дедлайн: </b>" + deadlineStr;
+
     if (response.empty())
         output->setText("Ошибка: пустой ответ от GigaChat");
     else
-        output->setText(lastResponse);
+        output->setText(outputStr);
 }
 
 void ChatBotWindow::onAddTaskPressed() {
@@ -76,5 +90,6 @@ void ChatBotWindow::onBackButtonClicked() {
 void ChatBotWindow::resetWidget() {
     lastResponse = nullptr;
     input->setText("");
-    output->setText("Привет! Я БРАНК. Введи краткое описание того,\nчто тебе надо сделать. И я придумаю все остальное =)");
+    output->setText(
+        "Привет! Я БРАНК. Введи краткое описание того,\nчто тебе надо сделать. И я придумаю все остальное =)");
 }

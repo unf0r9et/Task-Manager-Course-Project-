@@ -5,6 +5,7 @@
 #include <QCheckBox>
 #include <QPushButton>
 #include <QDate>
+#include <QStyleFactory>
 #include "styleloader/StyleLoader.h"
 
 
@@ -17,6 +18,9 @@ TaskCardWidget::TaskCardWidget(int taskId, const QString &title, const QString &
 
     completedCheckBox = new QCheckBox(this);
     completedCheckBox->setChecked(completed);
+
+
+
     connect(completedCheckBox, &QCheckBox::toggled, this, &TaskCardWidget::onCompletedChanged);
 
     titleLabel = new QLabel(title, this);

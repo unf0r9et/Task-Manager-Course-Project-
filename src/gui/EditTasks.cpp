@@ -36,8 +36,8 @@ EditTasks::EditTasks(QWidget *parent) : QWidget(parent) {
     scrollArea = new QScrollArea(this);
     scrollArea->setWidgetResizable(true);
     scrollArea->setObjectName("ScrollArea");
-    scrollArea->setGeometry(980, 15, 1000,WINDOW_HEIGHT - 30);
-
+    scrollArea->setGeometry(980, 0, 1000,WINDOW_HEIGHT);
+    scrollArea->setContentsMargins(0, 0, 0, 0);
     tasksContainer = new QWidget();
     tasksLayout = new QVBoxLayout(tasksContainer);
     scrollArea->setWidget(tasksContainer);

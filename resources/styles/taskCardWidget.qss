@@ -40,4 +40,12 @@ QPushButton {
       font-size: 30px;
 }
 
+    QCheckBox {
+    color: #e0e0e0;
+    }
+   QCheckBox::indicator {
+        width: 27px;
+        height: 32px;
+    }
+
 /* Add your QSS styles here */

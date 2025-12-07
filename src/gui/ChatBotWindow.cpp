@@ -58,6 +58,7 @@ ChatBotWindow::ChatBotWindow(QWidget *parent) : QWidget(parent) {
     output = new QLabel("Привет! Я БРАНК. Введи краткое описание того,\nчто тебе надо сделать. И я придумаю все остальное =)", this);
     output->setGeometry(150, 100, 800, 500);
     output->setObjectName("output");
+    output->setWordWrap(true);
     output->setAlignment(Qt::AlignCenter);
 
     connect(sendButton, &QPushButton::clicked, this, &ChatBotWindow::sendRequest);

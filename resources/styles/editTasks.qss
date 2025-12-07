@@ -26,23 +26,24 @@ background-color: #121212;
 }
 
 QWidget {
-    background-color: #f0f0f0;
+    background-color: #2d2d2d;
     color: #272B30;
 }
 
 QScrollBar:vertical {
-    background: #f0f0f0;
+    background-color: #121212;
+    background: #232323;
     width: 12px;
     margin: 0px 0px 0px 0px;
 }
 
 QScrollBar::handle:vertical {
-    background: #333333;
+    background: #121212;
     min-height: 20px;
 }
 
 QScrollBar::handle:vertical:hover {
-    background: #333333;
+    background: #121212;
 }
 
 QScrollBar::add-line:vertical,
@@ -50,5 +51,6 @@ QScrollBar::sub-line:vertical {
     background: none;
     height: 0px;
 }
+
 
 /* Add your QSS styles here */

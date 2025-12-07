@@ -52,13 +52,13 @@ void CalendarWindow::showMonth(int year, int month) {
         // Подсветка
         if (deadlineDates.contains(date)) {
             dayButtons[index]->setStyleSheet(
-                "QPushButton { background-color: #FFEB3B; border: 1px solid #FFC107; }"
-                "QPushButton:hover { background-color: #FFD54F; }"
+                "QPushButton { background-color: #771213; border: 1px solid #ccc; font-size: 20px;}"
+                "QPushButton:hover { background-color: #77132f; font-size: 20px;}"
             );
         } else {
             dayButtons[index]->setStyleSheet(
-                "QPushButton { background-color: white; border: 1px solid #ccc; }"
-                "QPushButton:hover { background-color: #e0e0e0; }"
+                "QPushButton { background-color: 1f1f1f; border: 1px solid #ccc; font-size: 20px; }"
+                "QPushButton:hover { background-color: #2f2f2f; font-size: 20px;}"
             );
         }
 
@@ -70,14 +70,14 @@ void CalendarWindow::showMonth(int year, int month) {
 }
 
 void CalendarWindow::clearCalendar() {
-    for (auto *button : dayButtons) {
+    for (auto *button: dayButtons) {
         button->setVisible(false);
         button->setText("");
     }
 }
 
 void CalendarWindow::updateNavigation() {
-    monthLabel->setText(QString::number(currentYear) + " / " + QString::number(currentMonth));
+    monthLabel->setText(QString::number(currentMonth) + " / " + QString::number(currentYear));
 }
 
 void CalendarWindow::onDayClicked(const QDate &date) {
@@ -94,8 +94,7 @@ void CalendarWindow::onDayClicked(const QDate &date) {
         taskList->addItem("Нет задач");
     } else {
         do {
-            taskList->addItem(query.value(0).toString());
+            taskList->addItem("∘ " + query.value(0).toString());
         } while (query.next());
     }
 }
-

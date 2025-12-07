@@ -1,0 +1,48 @@
+/*
+ * calendarWindow - Qt Style Sheet
+ * Created: 06.12.25
+ */
+
+/* Base styling */
+QWidget {
+    background-color: #f0f0f0;
+    color: #333333;
+}
+
+#CalendarWindow {
+background-color: #121212;
+}
+
+#BackButton {
+      background-color: #1f1f1f;
+      color: #e0e0e0;
+      border: 1px solid #1f1f1f;
+      font-family:"D050000L";
+      font-size: 40px;
+}
+
+QPushButton {
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 1px solid #333333;
+}
+
+/* Метки */
+QLabel {
+    color: #e0e0e0;
+    background: transparent;
+    font-size: 40px;
+}
+
+#Label {
+    color: #e0e0e0;
+    background: transparent;
+    font-size: 30px;
+}
+#TaskList {
+background-color: #1f1f1f;
+color: #e0e0e0;
+font-size: 40px;
+}
+
+/* Add your QSS styles here */

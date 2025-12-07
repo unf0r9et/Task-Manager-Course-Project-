@@ -11,6 +11,7 @@
         <file>styles/editingTaskMenu.qss</file>
         <file>styles/taskCardWidget.qss</file>
         <file>styles/addTaskMenu.qss</file>
+        <file>styles/calendarWindow.qss</file>
 
         <!--IMAGES-->
         <file>images/authorization.png</file>

@@ -6,9 +6,10 @@
 
 #include <QLabel>
 #include <QPushButton>
+#include <QSqlQuery>
 #include <QVBoxLayout>
 #include "styleloader/StyleLoader.h"
-
+#include "databaseManager/DatabaseManager.h"
 
 EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, int taskId) : QWidget(parent),
     taskId(taskId), dbManager(dbManager) {
@@ -34,22 +35,37 @@ EditingTaskMenu::EditingTaskMenu(DatabaseManager *dbManager, QWidget *parent, in
     auto buttonDelete = new QPushButton(this);
     buttonDelete->setText("Удалить");
 
-    auto *mainLayout = new QVBoxLayout(this);
-    mainLayout->addWidget(new QLabel("Название"));
-    mainLayout->addWidget(titleEdit);
-    mainLayout->addWidget(new QLabel("Описание:"));
-    mainLayout->addWidget(descriptionEdit);
-    mainLayout->addWidget(new QLabel("Категория:"));
-    mainLayout->addWidget(categoryCombo);
-    mainLayout->addWidget(new QLabel("Дедлайн:"));
-    mainLayout->addWidget(deadlineEdit);
-    auto buttonLayout = new QHBoxLayout();
-    buttonLayout->addWidget(buttonReject);
-    buttonLayout->addWidget(buttonAccept);
-    buttonLayout->addWidget(buttonDelete);
-    mainLayout->addLayout(buttonLayout);
 
-    setLayout(mainLayout);
+    QSqlQuery query = dbManager->getTaskById(taskId);
+    if (query.next()) {
+        QString title = query.value("title").toString();
+        QString description = query.value("description").toString();
+        QString category = query.value("category").toString();
+        QDate deadline = query.value("deadline").toDate();
+
+
+        auto *mainLayout = new QVBoxLayout(this);
+        mainLayout->addWidget(new QLabel("Название"));
+        titleEdit->setText(title);
+        mainLayout->addWidget(titleEdit);
+        mainLayout->addWidget(new QLabel("Описание:"));
+        descriptionEdit->setText(description);
+        mainLayout->addWidget(descriptionEdit);
+        mainLayout->addWidget(new QLabel("Категория:"));
+        categoryCombo->setCurrentText(category);
+        mainLayout->addWidget(categoryCombo);
+        mainLayout->addWidget(new QLabel("Дедлайн:"));
+        deadlineEdit->setDate(deadline);
+        mainLayout->addWidget(deadlineEdit);
+        auto buttonLayout = new QHBoxLayout();
+        buttonLayout->addWidget(buttonReject);
+        buttonLayout->addWidget(buttonAccept);
+        buttonLayout->addWidget(buttonDelete);
+        mainLayout->addLayout(buttonLayout);
+
+        setLayout(mainLayout);
+    }
+
     connect(buttonAccept, &QPushButton::clicked, this, &EditingTaskMenu::onAcceptClicked);
     connect(buttonReject, &QPushButton::clicked, this, &EditingTaskMenu::onRejectClicked);
     connect(buttonDelete, &QPushButton::clicked, this, &EditingTaskMenu::onDeleteClicked);
